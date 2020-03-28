@@ -3,10 +3,12 @@ import cors from 'cors';
 
 import { middlewareLogger } from './middleware/logger';
 import { usersRouter } from './routes/users';
-import { conversationsRouter } from './routes/conversations';
+import { messagesRouter } from './routes/messages';
+
 import { sequelize } from './database';
 import bodyParser from 'body-parser';
-import { messagesRouter } from './routes/messages';
+import { convoRouter } from './routes/conversations';
+
 
 const run = async () => {
   // Created an INSTANCE of an API
@@ -31,7 +33,6 @@ const run = async () => {
   // const users = await User.findAll();
   // console.log(users);
 
-
   // Use the middleware for ALL requests (Includes get, post, put, any url)
   app.use(cors())
   app.use(bodyParser.json()); // for parsing application/json
@@ -39,7 +40,7 @@ const run = async () => {
 
   // Defining a NEW PIPE
   app.use('/users', usersRouter);
-  app.use('/conversations', conversationsRouter);
+  app.use('/conversations', convoRouter);
   app.use('/messages', messagesRouter);
 
   // Running the web server on port 9999

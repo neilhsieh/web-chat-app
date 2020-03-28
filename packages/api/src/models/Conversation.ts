@@ -1,7 +1,7 @@
-import { Column, DataType, HasMany, Model, Table, BelongsToMany, AllowNull } from 'sequelize-typescript';
+import { AllowNull, Column, DataType, Model, Table, HasMany, BelongsToMany } from 'sequelize-typescript';
 
-import { Message } from './Message';
 import { User } from './User';
+import { Message } from './Message';
 import { UserConversation } from './UserConversation';
 
 @Table({ paranoid: true })
@@ -17,11 +17,11 @@ export class Conversation extends Model<Conversation> {
   @Column
   name: string;
 
-  // Setup relationship to messages
+  // One conversation to many messages relationship (1:n)
   @HasMany(() => Message)
   messages: Message[];
 
-  // Setup relationship to messages
+  // Conversation can have multiple users, vice versa (n:n)
   @BelongsToMany(() => User, () => UserConversation)
   users: User[];
 }

@@ -1,7 +1,6 @@
-import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
-
-import { Conversation } from './Conversation';
+import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
 import { User } from './User';
+import { Conversation } from './Conversation';
 
 @Table
 export class UserConversation extends Model<UserConversation> {

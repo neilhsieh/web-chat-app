@@ -1,28 +1,25 @@
 import { Router } from 'express';
 import { Conversation } from '../models/Conversation';
-import { Message } from '../models/Message';
 
-export const conversationsRouter = Router();
+export const convoRouter = Router();
 
-// CRUD of the Conversation in REST API
-
-// Get list of conversations
-conversationsRouter.get('/', async (_req, res) => {
-  // Fetch ALL the conversations
+// Get a list of conversations
+convoRouter.get('/', async (_req, res, _next) => {
+  // fetch all conversations
   const conversations = await Conversation.findAll();
-  // Send them in the pipe
+  // send through pipe
   res.json(conversations);
 });
 
-// Get ONE conversation
-conversationsRouter.get('/:conversationID', async (req, res) => {
+// Get one conversation
+convoRouter.get('/:conversationID', async (req, res, _next) => {
   const { conversationID } = req.params;
   const conversation = await Conversation.findByPk(conversationID);
   res.json(conversation);
 });
 
 // Create a conversation
-conversationsRouter.post('/', async (req, res, next) => {
+convoRouter.post('/', async (req, res, next) => {
   try {
     const conversation = new Conversation(req.body); // NOTE: THIS IS DANGEROUS
     await conversation.save();
@@ -32,8 +29,8 @@ conversationsRouter.post('/', async (req, res, next) => {
   }
 });
 
-// Update a conversation
-conversationsRouter.patch('/:conversationID', async (req, res, next) => {
+// Update conversation
+convoRouter.patch('/:conversationID', async (req, res, next) => {
   try {
     await Conversation.update(req.body, {
       where: { id: req.params.conversationID },
@@ -46,8 +43,8 @@ conversationsRouter.patch('/:conversationID', async (req, res, next) => {
   }
 });
 
-// Update a conversation
-conversationsRouter.delete('/:conversationID', async (req, res, next) => {
+// Delete Conversation
+convoRouter.delete('/:conversationID', async (req, res, next) => {
   try {
     Conversation.destroy({
       where: { id: req.params.conversationID }
@@ -60,14 +57,14 @@ conversationsRouter.delete('/:conversationID', async (req, res, next) => {
   }
 });
 
-
-conversationsRouter.get('/:conversationID/messages', async (req, res, next) => {
-  // Get the conversation
+// Get list of messages in conversation
+convoRouter.get('/:conversationID/messages', async (req, res, next) => {
+  // Get Conversation
   const { conversationID } = req.params;
   const conversation = await Conversation.findByPk(conversationID);
-  if (!conversation) return next(new Error('No conversation with that id'));
-  // Get the messages in the one to many relationship
+
+  if (!conversation) return next(new Error('No conversations with that id'));
+  // Get message in one to many relationship
   const messages = await conversation.$get('messages');
-  // Return the messages
   res.json(messages);
 });

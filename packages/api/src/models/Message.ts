@@ -1,5 +1,4 @@
-import { AllowNull, BelongsTo, Column, DataType, Model, Table, ForeignKey } from 'sequelize-typescript';
-
+import { AllowNull, Column, DataType, Model, Table, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { User } from './User';
 import { Conversation } from './Conversation';
 
@@ -16,13 +15,11 @@ export class Message extends Model<Message> {
   @Column
   content: string;
 
-  // This is the column of the conversation ID itself
   @AllowNull(false)
   @ForeignKey(() => User)
   @Column
-  userId: number; // Who sent the message
+  userId: number;
 
-  // This is just for Sequelize to create a one to many relationship
   @BelongsTo(() => User)
   user: User;
 

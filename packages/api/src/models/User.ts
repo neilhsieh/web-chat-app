@@ -1,5 +1,4 @@
-import { AllowNull, BelongsToMany, Column, DataType, Model, Table, Unique } from 'sequelize-typescript';
-
+import { AllowNull, Column, DataType, Model, Table, Unique, BelongsToMany } from 'sequelize-typescript';
 import { Conversation } from './Conversation';
 import { UserConversation } from './UserConversation';
 
