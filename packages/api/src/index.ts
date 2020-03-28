@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 
 import { middlewareLogger } from './middleware/logger';
 import { usersRouter } from './routes/users';
@@ -6,7 +7,6 @@ import { messagesRouter } from './routes/messages';
 
 import { sequelize } from './database';
 import bodyParser from 'body-parser';
-import { Message } from './models/Message';
 import { convoRouter } from './routes/conversations';
 
 
@@ -34,8 +34,10 @@ const run = async () => {
   // console.log(users);
 
   // Use the middleware for ALL requests (Includes get, post, put, any url)
+  app.use(cors())
   app.use(bodyParser.json()); // for parsing application/json
   app.use(middlewareLogger);
+
   // Defining a NEW PIPE
   app.use('/users', usersRouter);
   app.use('/conversations', convoRouter);

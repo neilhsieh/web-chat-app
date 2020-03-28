@@ -30,5 +30,4 @@ export class User extends Model<User> {
 
   @BelongsToMany(() => Conversation, () => UserConversation)
   conversations: Conversation[];
-
 }

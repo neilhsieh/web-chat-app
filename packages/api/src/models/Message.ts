@@ -25,5 +25,5 @@ export class Message extends Model<Message> {
 
   @ForeignKey(() => Conversation)
   @Column
-  conversationId: number;
+  conversationId: string;
 }
