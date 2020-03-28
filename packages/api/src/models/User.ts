@@ -1,4 +1,6 @@
-import { AllowNull, Column, DataType, Model, Table, Unique } from 'sequelize-typescript';
+import { AllowNull, Column, DataType, Model, Table, Unique, BelongsToMany } from 'sequelize-typescript';
+import { Conversation } from './Conversation';
+import { UserConversation } from './UserConversation';
 
 @Table({ paranoid: true })
 export class User extends Model<User> {
@@ -25,4 +27,8 @@ export class User extends Model<User> {
   @AllowNull(false)
   @Column
   password: string;
+
+  @BelongsToMany(() => Conversation, () => UserConversation)
+  conversations: Conversation[];
+
 }
