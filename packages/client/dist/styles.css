@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap);
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -47,4 +48,47 @@ table {
 
 * {
   box-sizing: border-box; }
+
+body {
+  font-family: 'Open Sans', sans-serif; }
+  body #app {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: [all-convo] 250px [ind-convo] auto [line3]; }
+
+main.conversation {
+  grid-column: ind-convo /  line3;
+  display: grid;
+  height: 100%;
+  grid-template-rows: [first-line] 100px [convo-start] auto [send-messages-line] 75px [last-line]; }
+  main.conversation > * {
+    padding: 10px; }
+  main.conversation header {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background-color: rgba(179, 234, 214, 0.35); }
+  main.conversation .messages li {
+    padding: 3px; }
+    main.conversation .messages li span {
+      display: inline-block;
+      border-radius: 25px;
+      background-color: #b3ead6;
+      padding: 13px; }
+  main.conversation .new-message {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #e5e5e5; }
+    main.conversation .new-message form {
+      height: 100%;
+      width: 100%; }
+      main.conversation .new-message form input {
+        height: 100%;
+        width: 90%;
+        font-size: 16px;
+        border-radius: 25px;
+        border: 2px solid #b3ead6;
+        padding: 0 20px; }
 
