@@ -1,60 +1,60 @@
-import './conversation.page.scss';
-
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
 
 import { api } from '../../lib/API';
-import {Conversation, Message} from '../../lib/types';
-import { useParams } from 'react-router';
 import { SendMessage } from './SendMessage';
 
+interface Conversation {
+  name: string;
+  id: string;
+};
+
 interface Params {
-  conversationID: string;
+  conversationId: string;
+};
+
+interface Message {
+  content: string;
+  userId: string;
 }
 
 export const ConversationPage = () => {
   const params = useParams<Params>();
 
-  const [conversation, updateConversation] = useState<Conversation>();
+  const [convo, updateConvo] = useState<Conversation>();
   const [messages, updateMessages] = useState<Message[]>([]);
 
-  const loadInitialData = async() => {
-    const conversation = await api.getConversation(params.conversationID);
+  const loadInitialData = async () => {
+    const conversation = await api.getConversation(params.conversationId);
+    const messages = await api.getMessages(params.conversationId);
     if (!conversation) return;
-    const messages = await api.getMessages(params.conversationID);
-    updateConversation(conversation);
+    updateConvo(conversation);
     updateMessages(messages);
-  }
+  };
 
-  useEffect(
-    () => { loadInitialData() }, // Watch these values for changes (Not DEEP change)
-    [] // If I pass nothing, it only gets called on component initialization
-  );
+  useEffect(() => {
+    loadInitialData();
+  }, []);
 
   return <main className="conversation">
-
-    <header>{conversation
-      ? <>Conversation {conversation.name}</>
-      : <h1>Could not find conversation</h1>
-    }
+    <header>{convo
+      ? <h1>{convo.name} </h1>
+      : <h1>"Conversation page"</h1>}
     </header>
-
-    <ul className="messages">
-      {messages.map(m =>
-        <li>
-          <span>{m.content}</span>
+    <ul>
+      {messages.map((message, i) =>
+        <li key={i}>
+          <span>{message.content}</span>
         </li>
       )}
     </ul>
-
-    <footer>
+    <div className="new-message">
       <SendMessage
-        conversationId={params.conversationID}
+        conversationId={params.conversationId}
         onNewMessage={message => {
-          console.log(message);
-
-          updateMessages(m => [...m, message])
+          updateMessages(m => [...m, message]);
         }}
       />
-    </footer>
+    </div>
   </main>
-}
+};

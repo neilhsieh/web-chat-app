@@ -1,32 +1,41 @@
 import axios from 'axios';
 
+
 class API {
+
   prefix = 'http://localhost:9999';
 
-  async getConversation(id: string) {
+  getConversation = async (convoId: string) => {
     try {
-      const res = await axios.get(`${this.prefix}/conversations/${id}`);
+      const res = await axios.get(`${this.prefix}/conversations/${convoId}`);
+      return res.data;
+    } catch (e) {
+      return null;
+    }
+  }
+  getMessages = async (convoId: string) => {
+    try {
+      const res = await axios.get(`${this.prefix}/conversations/${convoId}/messages`);
       return res.data;
     } catch (e) {
       return null;
     }
   }
 
-  async getMessages(id: string) {
-    const res = await axios.get(`${this.prefix}/conversations/${id}/messages`);
-    return res.data;
-  }
+  createMessage = async (
+    convoId: string,
+    message: string,
+  ) => {
 
-  async createMessage(
-    conversationId: string,
-    content: string
-  ) {
+    const userId = '09545d62-5d38-4ab7-b47f-74326ee7ff4d';
     const res = await axios.post(`${this.prefix}/messages`, {
-      "userId": "d6147162-7377-4236-ab1d-a641f577c3b7",
-      content,
-      conversationId
+      content: message,
+      conversationId: convoId,
+      userId: userId
     });
+
     return res.data;
   }
 }
+
 export const api = new API();

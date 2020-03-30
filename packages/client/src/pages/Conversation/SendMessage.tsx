@@ -13,14 +13,14 @@ export const SendMessage: React.FC<SendMessageProps> = ({
 }) => {
   const input = useRef<HTMLInputElement>(null);
 
-  const submit = async(e: FormEvent) => {
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
     const message = await api.createMessage(conversationId, input.current?.value!);
-    onNewMessage(message)
-    input.current!.value= '';
+    onNewMessage(message);
+    input.current!.value = '';
   };
 
   return <form onSubmit={submit}>
     <input type="text" ref={input} />
   </form>
-}
+};

@@ -3,7 +3,7 @@ import './lib/API';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {AppRouter} from './Router/Router'
+import { AppRouter } from './Router/Router';
 
 (async () =>
   ReactDOM.render(
