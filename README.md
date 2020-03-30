@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+# web-chat-app
+Fullstack Web Chat Application
+=======
+>>>>>>> 8f4683c4a85073971666101ddc2d6b60a5718c06
 # Code Mentoring Webinar - How to Build a Chat Web App
 
 ![How to build a Chat Web App](banner.jpg)
@@ -96,3 +103,7 @@ and WebSockets to talk to the API.
   - What are the addons?
 - Deploy our Client using Netlify:
   - What is Netlify and how do I deploy?
+<<<<<<< HEAD
+=======
+>>>>>>> e97a835421d9d0d6bfd61fe1b321bc4d3ddf0d07
+>>>>>>> 8f4683c4a85073971666101ddc2d6b60a5718c06
