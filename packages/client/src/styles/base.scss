@@ -11,8 +11,5 @@ body {
   font-family: 'Open Sans', sans-serif;
   #app {
     height: 100vh;
-    display: grid;
-    grid-template-columns: [all-convo] 250px [ind-convo] auto [line3] ;
-
   }
 }

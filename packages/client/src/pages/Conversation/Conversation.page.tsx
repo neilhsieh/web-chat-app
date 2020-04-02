@@ -1,24 +1,12 @@
 import './conversation.page.scss';
+import { Params, Conversation, Message } from '../../lib/types';
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 
 import { api } from '../../lib/API';
 import { SendMessage } from './SendMessage';
-
-// interface Conversation {
-//   name: string;
-//   id: string;
-// };
-
-// interface Params {
-//   conversationId: string;
-// };
-
-// interface Message {
-//   content: string;
-//   userId: string;
-// }
+import { ConversationList } from './ConversationList';
 
 export const ConversationPage = () => {
   const params = useParams<Params>();
@@ -43,6 +31,7 @@ export const ConversationPage = () => {
       ? <h1>{convo.name} </h1>
       : <h1>Conversation page</h1>}
     </header>
+    <ConversationList />
     <ul className="messages">
       {messages.map((message, i) =>
         <li key={i}>

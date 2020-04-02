@@ -52,32 +52,69 @@ table {
 body {
   font-family: 'Open Sans', sans-serif; }
   body #app {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: [all-convo] 250px [ind-convo] auto [line3]; }
+    height: 100vh; }
 
 main.conversation {
-  grid-column: ind-convo /  line3;
+  grid-template-columns: [all-convo] 250px [ind-convo] auto [line3];
   display: grid;
   height: 100%;
   grid-template-rows: [first-line] 100px [convo-start] auto [send-messages-line] 75px [last-line]; }
   main.conversation > * {
-    padding: 10px; }
+    padding: 0 10px; }
   main.conversation header {
+    grid-column: ind-convo /  line3;
     display: flex;
     align-items: center;
     padding: 5px 10px;
     font-size: 2.5rem;
     font-weight: 700;
+    color: #222;
     background-color: rgba(179, 234, 214, 0.35); }
-  main.conversation .messages li {
-    padding: 3px; }
-    main.conversation .messages li span {
-      display: inline-block;
-      border-radius: 25px;
-      background-color: #b3ead6;
-      padding: 13px; }
+  main.conversation .conversations-container {
+    grid-column: all-convo / span 1;
+    grid-row: first-line / last-line;
+    height: 100%; }
+    main.conversation .conversations-container h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #222;
+      padding: 20px 0;
+      border-bottom: 1px solid #e2e2e2;
+      height: 100px;
+      display: flex;
+      align-items: center; }
+      main.conversation .conversations-container h2 span {
+        width: fit-content;
+        position: relative; }
+        main.conversation .conversations-container h2 span:before {
+          content: '';
+          position: absolute;
+          z-index: -1;
+          bottom: -5px;
+          height: 15px;
+          width: 100%;
+          left: 0;
+          -webkit-transform: skew(-13deg);
+          -moz-transform: skew(-13deg);
+          -o-transform: skew(-13deg);
+          background-color: rgba(211, 211, 211, 0.6); }
+    main.conversation .conversations-container .conversations {
+      margin-top: 20px; }
+      main.conversation .conversations-container .conversations li {
+        padding: 15px 0; }
+  main.conversation .messages {
+    grid-column: ind-convo /  line3;
+    padding: 10px 0; }
+    main.conversation .messages li {
+      padding: 3px; }
+      main.conversation .messages li span {
+        display: inline-block;
+        border-radius: 25px;
+        background-color: #b3ead6;
+        padding: 13px;
+        font-weight: 300; }
   main.conversation .new-message {
+    grid-column: ind-convo /  line3;
     padding-top: 15px;
     padding-bottom: 15px;
     background-color: #e5e5e5; }
