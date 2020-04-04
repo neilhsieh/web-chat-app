@@ -21,6 +21,7 @@ export const SendMessage: React.FC<SendMessageProps> = ({
   };
 
   return <form onSubmit={submit}>
-    <input type="text" ref={input} />
+    <input type="text" ref={input} placeholder="Say something..." />
+    <button className="submit" type="submit">Send</button>
   </form>
 };

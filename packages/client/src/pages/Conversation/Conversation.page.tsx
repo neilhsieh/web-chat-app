@@ -13,6 +13,7 @@ export const ConversationPage = () => {
 
   const [convo, updateConvo] = useState<Conversation>();
   const [messages, updateMessages] = useState<Message[]>([]);
+  const [currentConvo, updateCurrentConvo] = useState<Conversation>();
 
   const loadInitialData = async () => {
     const conversation = await api.getConversation(params.conversationId);
@@ -26,26 +27,34 @@ export const ConversationPage = () => {
     loadInitialData();
   }, []);
 
-  return <main className="conversation">
-    <header>{convo
-      ? <h1>{convo.name} </h1>
-      : <h1>Conversation page</h1>}
-    </header>
-    <ConversationList />
-    <ul className="messages">
-      {messages.map((message, i) =>
-        <li key={i}>
-          <span>{message.content}</span>
-        </li>
-      )}
-    </ul>
-    <div className="new-message">
-      <SendMessage
-        conversationId={params.conversationId}
-        onNewMessage={message => {
-          updateMessages(m => [...m, message]);
-        }}
-      />
-    </div>
-  </main>
+
+
+  return <div className="conversation-page">
+    <ConversationList
+      currentConvo={c => {
+        updateCurrentConvo(c);
+      }}
+    />
+    <main className="conversation">
+      <header>{convo
+        ? <h1>{convo.name} </h1>
+        : <h1>Conversation page</h1>}
+      </header>
+      <ul className="messages">
+        {messages.map((message, i) =>
+          <li key={i} >
+            <span>{message.content}</span>
+          </li>
+        )}
+      </ul>
+      <div className="new-message">
+        <SendMessage
+          conversationId={params.conversationId}
+          onNewMessage={message => {
+            updateMessages(m => [...m, message]);
+          }}
+        />
+      </div>
+    </main>
+  </div>
 };

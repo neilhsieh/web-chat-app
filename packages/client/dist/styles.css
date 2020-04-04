@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap);
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -54,39 +55,32 @@ body {
   body #app {
     height: 100vh; }
 
-main.conversation {
-  grid-template-columns: [all-convo] 250px [ind-convo] auto [line3];
+.conversation-page {
   display: grid;
-  height: 100%;
-  grid-template-rows: [first-line] 100px [convo-start] auto [send-messages-line] 75px [last-line]; }
-  main.conversation > * {
+  grid-template-columns: [line1] 250px [middle] auto [last-line];
+  height: 100%; }
+  .conversation-page > * {
     padding: 0 10px; }
-  main.conversation header {
-    grid-column: ind-convo /  line3;
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #222;
-    background-color: rgba(179, 234, 214, 0.35); }
-  main.conversation .conversations-container {
-    grid-column: all-convo / span 1;
-    grid-row: first-line / last-line;
+  .conversation-page aside.conversations-container {
+    grid-column: line1 /  middle;
+    width: 250px;
+    display: grid;
+    grid-template-rows: [first-line] 100px [middle] auto [last-line];
     height: 100%; }
-    main.conversation .conversations-container h2 {
+    .conversation-page aside.conversations-container h2 {
+      grid-row: first-line / middle;
+      display: flex;
+      align-items: center;
       font-size: 1.75rem;
       font-weight: 700;
+      font-family: 'Playfair Display', serif;
       color: #222;
-      padding: 20px 0;
-      border-bottom: 1px solid #e2e2e2;
-      height: 100px;
-      display: flex;
-      align-items: center; }
-      main.conversation .conversations-container h2 span {
+      padding: 20px 10px;
+      border-bottom: 1px solid rgba(211, 211, 211, 0.6); }
+      .conversation-page aside.conversations-container h2 span {
         width: fit-content;
         position: relative; }
-        main.conversation .conversations-container h2 span:before {
+        .conversation-page aside.conversations-container h2 span:before {
           content: '';
           position: absolute;
           z-index: -1;
@@ -98,34 +92,76 @@ main.conversation {
           -moz-transform: skew(-13deg);
           -o-transform: skew(-13deg);
           background-color: rgba(211, 211, 211, 0.6); }
-    main.conversation .conversations-container .conversations {
+    .conversation-page aside.conversations-container .conversations {
       margin-top: 20px; }
-      main.conversation .conversations-container .conversations li {
-        padding: 15px 0; }
-  main.conversation .messages {
-    grid-column: ind-convo /  line3;
-    padding: 10px 0; }
-    main.conversation .messages li {
-      padding: 3px; }
-      main.conversation .messages li span {
-        display: inline-block;
-        border-radius: 25px;
-        background-color: #b3ead6;
-        padding: 13px;
-        font-weight: 300; }
-  main.conversation .new-message {
-    grid-column: ind-convo /  line3;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    background-color: #e5e5e5; }
-    main.conversation .new-message form {
-      height: 100%;
-      width: 100%; }
-      main.conversation .new-message form input {
+      .conversation-page aside.conversations-container .conversations li {
+        border: 1px solid transparent;
+        transition: all 0.2s ease-in-out;
+        margin-bottom: 5px; }
+        .conversation-page aside.conversations-container .conversations li.selected {
+          border-radius: 5px;
+          background-color: #222; }
+          .conversation-page aside.conversations-container .conversations li.selected a {
+            color: white;
+            font-weight: 700; }
+        .conversation-page aside.conversations-container .conversations li:hover:not(.selected) {
+          border-radius: 5px;
+          background-color: rgba(211, 211, 211, 0.1);
+          border: 1px solid rgba(211, 211, 211, 0.6);
+          cursor: pointer; }
+        .conversation-page aside.conversations-container .conversations li a {
+          display: block;
+          padding: 15px 10px;
+          width: 100%;
+          text-decoration: none;
+          color: #222; }
+  .conversation-page main.conversation {
+    grid-column: middle / last-line;
+    display: grid;
+    grid-template-rows: [first-line] 100px [second-line] auto [third-line] 75px [last-line]; }
+    .conversation-page main.conversation header {
+      display: flex;
+      align-items: center;
+      padding: 5px 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #222;
+      background-color: rgba(179, 234, 214, 0.35); }
+    .conversation-page main.conversation ul.messages {
+      padding: 10px 20px;
+      overflow: scroll; }
+      .conversation-page main.conversation ul.messages li {
+        padding: 3px 0; }
+        .conversation-page main.conversation ul.messages li span {
+          display: inline-block;
+          border-radius: 25px;
+          background-color: #b3ead6;
+          padding: 13px;
+          font-weight: 300; }
+    .conversation-page main.conversation .new-message {
+      padding: 15px 20px; }
+      .conversation-page main.conversation .new-message form {
+        display: flex;
+        justify-content: space-between;
         height: 100%;
-        width: 90%;
-        font-size: 16px;
-        border-radius: 25px;
-        border: 2px solid #b3ead6;
-        padding: 0 20px; }
+        width: 100%; }
+        .conversation-page main.conversation .new-message form input {
+          height: 100%;
+          width: 90%;
+          font-size: 16px;
+          border-radius: 25px;
+          border: 2px solid #b3ead6;
+          padding: 0 20px; }
+          .conversation-page main.conversation .new-message form input::placeholder {
+            color: #aaa; }
+        .conversation-page main.conversation .new-message form .submit {
+          background-color: rgba(179, 234, 214, 0.35);
+          font-size: 14px;
+          border-radius: 100%;
+          border: 1px solid rgba(179, 234, 214, 0.35);
+          transition: all 0.15s ease-in-out; }
+          .conversation-page main.conversation .new-message form .submit:hover {
+            cursor: pointer;
+            background-color: #b3ead6; }
 
