@@ -17,12 +17,12 @@ let UserConversation = class UserConversation extends sequelize_typescript_1.Mod
 __decorate([
     sequelize_typescript_1.ForeignKey(() => User_1.User),
     sequelize_typescript_1.Column,
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], UserConversation.prototype, "userId", void 0);
 __decorate([
     sequelize_typescript_1.ForeignKey(() => Conversation_1.Conversation),
     sequelize_typescript_1.Column,
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], UserConversation.prototype, "conversationId", void 0);
 UserConversation = __decorate([
     sequelize_typescript_1.Table

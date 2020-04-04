@@ -31,7 +31,7 @@ __decorate([
     sequelize_typescript_1.AllowNull(false),
     sequelize_typescript_1.ForeignKey(() => User_1.User),
     sequelize_typescript_1.Column,
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], Message.prototype, "userId", void 0);
 __decorate([
     sequelize_typescript_1.BelongsTo(() => User_1.User),
