@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Conversation } from '../../lib/types';
 
 import { api } from '../../lib/API';
+import { Link } from 'react-router-dom';
 
 export interface CurrentMessageProps {
   currentConvo: (convo: Conversation) => void;
@@ -32,9 +33,12 @@ export const ConversationList: React.FC<CurrentMessageProps> = ({
         <li key={i} className={
           convo.id === window.location.href.split('/').pop() ? "selected" : ""
         }>
-          <a href={`/convo/${convo.id}`} >
+          <Link to={`/convo/${convo.id}`}>
             {convo.name}
-          </a>
+          </Link>
+          {/* <a href={`/convo/${convo.id}`} >
+            {convo.name}
+          </a> */}
         </li>
       )}
     </ul>

@@ -25,7 +25,7 @@ export const ConversationPage = () => {
 
   useEffect(() => {
     loadInitialData();
-  }, []);
+  }, [params.conversationId]);
 
 
 
