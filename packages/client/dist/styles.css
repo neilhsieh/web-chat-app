@@ -1,0 +1,168 @@
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap);
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+* {
+  box-sizing: border-box; }
+
+body {
+  font-family: 'Open Sans', sans-serif; }
+  body #app {
+    height: 100vh; }
+
+.conversation-page {
+  display: grid;
+  grid-template-columns: [line1] 250px [middle] auto [last-line];
+  height: 100%; }
+  .conversation-page > * {
+    padding: 0 10px; }
+  .conversation-page main.conversation {
+    grid-column: middle / last-line;
+    display: grid;
+    grid-template-rows: [first-line] 100px [second-line] auto [third-line] 75px [last-line]; }
+    .conversation-page main.conversation header {
+      display: flex;
+      align-items: center;
+      padding: 5px 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #222;
+      background-color: rgba(179, 234, 214, 0.35); }
+    .conversation-page main.conversation ul.messages {
+      padding: 10px 20px;
+      overflow: scroll; }
+      .conversation-page main.conversation ul.messages li {
+        padding: 3px 0; }
+        .conversation-page main.conversation ul.messages li span {
+          display: inline-block;
+          border-radius: 25px;
+          background-color: #b3ead6;
+          padding: 13px;
+          font-weight: 300; }
+    .conversation-page main.conversation .new-message {
+      padding: 15px 20px; }
+      .conversation-page main.conversation .new-message form {
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+        width: 100%; }
+        .conversation-page main.conversation .new-message form input {
+          height: 100%;
+          width: 90%;
+          font-size: 16px;
+          border-radius: 25px;
+          border: 2px solid #b3ead6;
+          padding: 0 20px; }
+          .conversation-page main.conversation .new-message form input::placeholder {
+            color: #aaa; }
+        .conversation-page main.conversation .new-message form .submit {
+          background-color: rgba(179, 234, 214, 0.35);
+          font-size: 14px;
+          border-radius: 100%;
+          border: 1px solid rgba(179, 234, 214, 0.35);
+          transition: all 0.15s ease-in-out; }
+          .conversation-page main.conversation .new-message form .submit:hover {
+            cursor: pointer;
+            background-color: #b3ead6; }
+
+aside.conversations-container {
+  grid-column: line1 /  middle;
+  width: 250px;
+  display: grid;
+  grid-template-rows: [first-line] 100px [middle] auto [last-line];
+  height: 100%; }
+  aside.conversations-container h2 {
+    grid-row: first-line / middle;
+    display: flex;
+    align-items: center;
+    font-size: 1.75rem;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    color: #222;
+    padding: 20px 10px;
+    border-bottom: 1px solid rgba(211, 211, 211, 0.6); }
+    aside.conversations-container h2 span {
+      width: fit-content;
+      position: relative; }
+      aside.conversations-container h2 span:before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        bottom: -5px;
+        height: 15px;
+        width: 100%;
+        left: 0;
+        -webkit-transform: skew(-13deg);
+        -moz-transform: skew(-13deg);
+        -o-transform: skew(-13deg);
+        background-color: rgba(211, 211, 211, 0.6); }
+  aside.conversations-container .conversations {
+    margin-top: 20px; }
+    aside.conversations-container .conversations li {
+      border: 1px solid transparent;
+      transition: all 0.2s ease-in-out;
+      margin-bottom: 5px; }
+      aside.conversations-container .conversations li.selected {
+        border-radius: 5px;
+        background-color: #222; }
+        aside.conversations-container .conversations li.selected a {
+          color: white;
+          font-weight: 700; }
+      aside.conversations-container .conversations li:hover:not(.selected) {
+        border-radius: 5px;
+        background-color: rgba(211, 211, 211, 0.1);
+        border: 1px solid rgba(211, 211, 211, 0.6);
+        cursor: pointer; }
+      aside.conversations-container .conversations li a {
+        display: block;
+        padding: 15px 10px;
+        width: 100%;
+        text-decoration: none;
+        color: #222; }
+

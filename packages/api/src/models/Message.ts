@@ -18,7 +18,7 @@ export class Message extends Model<Message> {
   @AllowNull(false)
   @ForeignKey(() => User)
   @Column
-  userId: number;
+  userId: string;
 
   @BelongsTo(() => User)
   user: User;

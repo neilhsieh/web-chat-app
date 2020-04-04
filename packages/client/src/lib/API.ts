@@ -13,6 +13,7 @@ class API {
       return null;
     }
   }
+
   getMessages = async (convoId: string) => {
     try {
       const res = await axios.get(`${this.prefix}/conversations/${convoId}/messages`);
@@ -33,9 +34,18 @@ class API {
       conversationId: convoId,
       userId: userId
     });
-
     return res.data;
   }
+
+  getConversations = async () => {
+    try {
+      const res = await axios.get(`${this.prefix}/conversations`);
+      return res.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
 }
 
 export const api = new API();
