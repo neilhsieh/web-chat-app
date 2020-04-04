@@ -1,8 +1,4 @@
-$green: rgba(179, 234, 214, 1);
-$ltGreen: rgba(179, 234, 214, 0.35);
-$grey: rgba(211, 211, 211, 0.6);
-$ltGrey: rgba(211, 211, 211, 0.1);
-$textGrey:#222;
+@import '../../styles/variables.scss';
 
 .conversation-page {
   display: grid;
@@ -14,73 +10,7 @@ $textGrey:#222;
   & > * {
     padding: 0 10px;
   }
-  aside.conversations-container {
-    grid-column: line1 /  middle;
-    width: 250px;
-    display: grid;
-    grid-template-rows: [first-line] 100px [middle] auto [last-line];
-    height: 100%;
-    h2 {
-      grid-row: first-line / middle;
-      display: flex;
-      align-items: center;
-      font-size: 1.75rem;
-      font-weight: 700;
-      font-family: 'Playfair Display', serif;
-      color: $textGrey;
-      padding: 20px 10px;
-      border-bottom: 1px solid $grey;
-      span {
-        width: fit-content;
-        position: relative;
 
-        &:before {
-          content: '';
-          position:absolute;
-          z-index: -1;
-          bottom: -5px;
-          height: 15px;
-          width: 100%;
-          left: 0;
-          -webkit-transform: skew(-13deg);
-          -moz-transform: skew(-13deg);
-          -o-transform: skew(-13deg);
-          background-color: $grey;
-        }
-      }
-    }
-    .conversations {
-      margin-top: 20px;
-      li {
-        // padding: 15px 10px;
-        border: 1px solid transparent;
-        transition: all 0.2s ease-in-out;
-        margin-bottom: 5px;
-        &.selected {
-          border-radius: 5px;
-          background-color: $textGrey;
-          a {
-            color: white;
-            font-weight: 700;
-          }
-        }
-        &:hover:not(.selected) {
-          border-radius: 5px;
-          background-color: $ltGrey;
-          border: 1px solid $grey;
-          cursor: pointer;
-      
-        }
-        a {
-          display: block;
-          padding: 15px 10px;
-          width: 100%;
-          text-decoration: none;
-          color: $textGrey;
-        }
-      }
-    }
-  }
   
   
   main.conversation {

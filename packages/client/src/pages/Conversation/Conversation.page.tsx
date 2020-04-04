@@ -6,7 +6,7 @@ import { useParams } from 'react-router';
 
 import { api } from '../../lib/API';
 import { SendMessage } from './SendMessage';
-import { ConversationList } from './ConversationList';
+import { ConversationList } from '../../Component/Sidebar/ConversationList';
 
 export const ConversationPage = () => {
   const params = useParams<Params>();

@@ -1,3 +1,5 @@
+import './conversation-list.scss';
+
 import React, { useState, useEffect } from 'react';
 import { Conversation } from '../../lib/types';
 
