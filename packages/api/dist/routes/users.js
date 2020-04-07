@@ -1,7 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const User_1 = require("../models/User");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 exports.usersRouter = express_1.Router();
 // CRUD of the User in REST API
 // Get list of users
@@ -20,7 +24,12 @@ exports.usersRouter.get('/:userID', async (req, res) => {
 // Create a user
 exports.usersRouter.post('/', async (req, res, next) => {
     try {
-        const user = new User_1.User(req.body); // NOTE: THIS IS DANGEROUS
+        const { password: plainPass, ...userData } = req.body;
+        const salt = bcrypt_1.default.genSaltSync(10);
+        const password = bcrypt_1.default.hashSync(plainPass, salt);
+        const user = new User_1.User({
+            ...userData, password
+        }); // NOTE: THIS IS DANGEROUS
         await user.save();
         res.json(user);
     }

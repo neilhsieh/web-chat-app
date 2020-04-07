@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { User } from '../models/User';
-
+import bcrypt from 'bcrypt';
 export const usersRouter = Router();
 
 // CRUD of the User in REST API
@@ -16,15 +16,23 @@ usersRouter.get('/', async (_req, res) => {
 // Get ONE user
 usersRouter.get('/:userID', async (req, res) => {
   const { userID } = req.params;
+
   const user = await User.findByPk(userID);
   res.json(user);
 });
 
 // Create a user
 usersRouter.post('/', async (req, res, next) => {
+
   try {
-    const user = new User(req.body); // NOTE: THIS IS DANGEROUS
+    const { password: plainPass, ...userData } = req.body;
+    const salt = bcrypt.genSaltSync(10);
+    const password = bcrypt.hashSync(plainPass, salt);
+    const user = new User({
+      ...userData, password
+    }); // NOTE: THIS IS DANGEROUS
     await user.save();
+
     res.json(user);
   } catch (e) {
     next(e);

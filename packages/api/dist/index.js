@@ -6,11 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const logger_1 = require("./middleware/logger");
+const auth_1 = require("./middleware/auth");
 const users_1 = require("./routes/users");
 const messages_1 = require("./routes/messages");
 const database_1 = require("./database");
 const body_parser_1 = __importDefault(require("body-parser"));
 const conversations_1 = require("./routes/conversations");
+const auth_2 = require("./routes/auth");
 const run = async () => {
     // Created an INSTANCE of an API
     const app = express_1.default();
@@ -37,7 +39,8 @@ const run = async () => {
     app.use(body_parser_1.default.json()); // for parsing application/json
     app.use(logger_1.middlewareLogger);
     // Defining a NEW PIPE
-    app.use('/users', users_1.usersRouter);
+    app.use('/auth', auth_2.authRouter);
+    app.use('/users', auth_1.middlewareAuth, users_1.usersRouter);
     app.use('/conversations', conversations_1.convoRouter);
     app.use('/messages', messages_1.messagesRouter);
     // Running the web server on port 9999
