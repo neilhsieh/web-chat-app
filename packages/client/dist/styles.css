@@ -52,70 +52,20 @@ table {
 
 body {
   font-family: 'Open Sans', sans-serif; }
+  body h1, body h2, body h3, body h4, body h5 {
+    font-family: 'Playfair Display', serif; }
   body #app {
     height: 100vh; }
-
-.conversation-page {
-  display: grid;
-  grid-template-columns: [line1] 250px [middle] auto [last-line];
-  height: 100%; }
-  .conversation-page > * {
-    padding: 0 10px; }
-  .conversation-page main.conversation {
-    grid-column: middle / last-line;
-    display: grid;
-    grid-template-rows: [first-line] 100px [second-line] auto [third-line] 75px [last-line]; }
-    .conversation-page main.conversation header {
-      display: flex;
-      align-items: center;
-      padding: 5px 20px;
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #222;
-      background-color: rgba(179, 234, 214, 0.35); }
-    .conversation-page main.conversation ul.messages {
-      padding: 10px 20px;
-      overflow: scroll; }
-      .conversation-page main.conversation ul.messages li {
-        padding: 3px 0; }
-        .conversation-page main.conversation ul.messages li span {
-          display: inline-block;
-          border-radius: 25px;
-          background-color: #b3ead6;
-          padding: 13px;
-          font-weight: 300; }
-    .conversation-page main.conversation .new-message {
-      padding: 15px 20px; }
-      .conversation-page main.conversation .new-message form {
-        display: flex;
-        justify-content: space-between;
-        height: 100%;
-        width: 100%; }
-        .conversation-page main.conversation .new-message form input {
-          height: 100%;
-          width: 90%;
-          font-size: 16px;
-          border-radius: 25px;
-          border: 2px solid #b3ead6;
-          padding: 0 20px; }
-          .conversation-page main.conversation .new-message form input::placeholder {
-            color: #aaa; }
-        .conversation-page main.conversation .new-message form .submit {
-          background-color: rgba(179, 234, 214, 0.35);
-          font-size: 14px;
-          border-radius: 100%;
-          border: 1px solid rgba(179, 234, 214, 0.35);
-          transition: all 0.15s ease-in-out; }
-          .conversation-page main.conversation .new-message form .submit:hover {
-            cursor: pointer;
-            background-color: #b3ead6; }
+  body input {
+    border-radius: 25px;
+    border-width: 2px;
+    border-style: solid; }
 
 aside.conversations-container {
   grid-column: line1 /  middle;
   width: 250px;
   display: grid;
-  grid-template-rows: [first-line] 100px [middle] auto [last-line];
+  grid-template-rows: [first-line] 100px [middle] auto [third-line] 75px [last-line];
   height: 100%; }
   aside.conversations-container h2 {
     grid-row: first-line / middle;
@@ -123,7 +73,6 @@ aside.conversations-container {
     align-items: center;
     font-size: 1.75rem;
     font-weight: 700;
-    font-family: 'Playfair Display', serif;
     color: #222;
     padding: 20px 10px;
     border-bottom: 1px solid rgba(211, 211, 211, 0.6); }
@@ -165,4 +114,184 @@ aside.conversations-container {
         width: 100%;
         text-decoration: none;
         color: #222; }
+
+.create-convo-button {
+  border: 1px solid #222;
+  margin: 15px;
+  border-radius: 10px;
+  background-color: white;
+  color: #222;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+  font-weight: 700;
+  font-size: 16px; }
+  .create-convo-button i {
+    margin-right: 15px; }
+  .create-convo-button:hover {
+    background-color: #222;
+    color: white;
+    cursor: pointer; }
+
+.modal-page-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.01);
+  transition: all 0.2s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .modal-page-container.closed {
+    display: none; }
+  .modal-page-container.opened {
+    background-color: rgba(128, 128, 128, 0.5); }
+    .modal-page-container.opened .modal-popup {
+      opacity: 1; }
+  .modal-page-container .modal-popup {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    width: 450px;
+    height: 250px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px; }
+    .modal-page-container .modal-popup h2 {
+      border-bottom: 0; }
+    .modal-page-container .modal-popup form {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 0 10px;
+      height: 100%; }
+      .modal-page-container .modal-popup form input {
+        width: 100%;
+        margin-top: 25px;
+        line-height: 40px;
+        padding: 0 20px;
+        font-size: 16px; }
+      .modal-page-container .modal-popup form .button-group {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 10px; }
+        .modal-page-container .modal-popup form .button-group button {
+          font-size: 14px;
+          line-height: 36px;
+          padding: 0 15px;
+          border-radius: 20px;
+          margin-left: 10px; }
+          .modal-page-container .modal-popup form .button-group button.submit {
+            border: none;
+            background-color: #222;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold; }
+          .modal-page-container .modal-popup form .button-group button.close-modal {
+            border: none;
+            background-color: rgba(211, 211, 211, 0.6);
+            color: #222;
+            text-transform: uppercase; }
+          .modal-page-container .modal-popup form .button-group button:hover {
+            opacity: 0.8;
+            cursor: pointer; }
+
+.conversation-page {
+  display: grid;
+  grid-template-columns: [line1] 250px [middle] auto [last-line];
+  height: 100%; }
+  .conversation-page > * {
+    padding: 0 10px; }
+  .conversation-page main.conversation {
+    grid-column: middle / last-line;
+    display: grid;
+    grid-template-rows: [first-line] 100px [second-line] auto [third-line] 75px [last-line]; }
+    .conversation-page main.conversation header {
+      display: flex;
+      align-items: center;
+      padding: 5px 20px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #222;
+      background-color: rgba(179, 234, 214, 0.35); }
+    .conversation-page main.conversation ul.messages {
+      padding: 10px 20px;
+      overflow: scroll; }
+      .conversation-page main.conversation ul.messages li {
+        padding: 3px 0; }
+        .conversation-page main.conversation ul.messages li span {
+          display: inline-block;
+          border-radius: 25px;
+          background-color: #b3ead6;
+          padding: 13px;
+          font-weight: 300; }
+    .conversation-page main.conversation .new-message {
+      padding: 15px 20px; }
+      .conversation-page main.conversation .new-message form {
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+        width: 100%; }
+        .conversation-page main.conversation .new-message form input {
+          height: 100%;
+          width: 90%;
+          font-size: 16px;
+          border-radius: 25px;
+          border: 2px solid #b3ead6;
+          padding: 0 20px; }
+          .conversation-page main.conversation .new-message form input::placeholder {
+            color: #aaa; }
+        .conversation-page main.conversation .new-message form .submit {
+          background-color: rgba(179, 234, 214, 0.35);
+          font-size: 14px;
+          border-radius: 100%;
+          border-color: rgba(179, 234, 214, 0.35);
+          transition: all 0.15s ease-in-out; }
+          .conversation-page main.conversation .new-message form .submit:hover {
+            cursor: pointer;
+            background-color: #b3ead6; }
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(211, 211, 211, 0.6); }
+  .login-page form {
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px;
+    width: 400px; }
+    .login-page form * {
+      display: block;
+      width: 100%; }
+    .login-page form h1 {
+      line-height: 1.2;
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: 700; }
+    .login-page form input,
+    .login-page form button {
+      line-height: 35px;
+      font-size: 16px;
+      margin-top: 20px; }
+    .login-page form input {
+      padding: 0 15px;
+      border-color: rgba(211, 211, 211, 0.6); }
+    .login-page form button {
+      line-height: 35px;
+      background-color: #222;
+      color: white;
+      text-transform: uppercase;
+      border-radius: 30px;
+      padding: 5px 15px; }
+      .login-page form button:hover {
+        cursor: pointer;
+        opacity: 0.85; }
+  .login-page .error-message {
+    color: red;
+    margin: 10px 0; }
 

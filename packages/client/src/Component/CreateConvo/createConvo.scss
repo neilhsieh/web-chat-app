@@ -1,0 +1,21 @@
+@import '../../styles/variables.scss';
+
+.create-convo-button {
+  border: 1px solid $textGrey;
+  margin: 15px;
+  border-radius: 10px;
+  background-color: white;
+  color: $textGrey;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+  font-weight: 700;
+  font-size: 16px;
+  i {
+    margin-right: 15px;
+  }
+  &:hover {
+    background-color: $textGrey;
+    color: white;
+    cursor: pointer;
+  }
+}

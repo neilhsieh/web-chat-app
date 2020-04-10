@@ -5,14 +5,9 @@ import { Conversation } from '../../lib/types';
 
 import { api } from '../../lib/API';
 import { Link } from 'react-router-dom';
+import { CreateConversation } from '../CreateConvo/CreateConversation';
 
-export interface CurrentMessageProps {
-  currentConvo: (convo: Conversation) => void;
-}
-
-export const ConversationList: React.FC<CurrentMessageProps> = ({
-  currentConvo
-}) => {
+export const ConversationList = () => {
 
   const [convos, updateConvos] = useState<Conversation[]>([]);
 
@@ -20,7 +15,7 @@ export const ConversationList: React.FC<CurrentMessageProps> = ({
     const conversations = await api.getConversations();
     if (!conversations) return;
     updateConvos(conversations);
-  }
+  };
 
   useEffect(() => {
     loadConversations();
@@ -36,11 +31,9 @@ export const ConversationList: React.FC<CurrentMessageProps> = ({
           <Link to={`/convo/${convo.id}`}>
             {convo.name}
           </Link>
-          {/* <a href={`/convo/${convo.id}`} >
-            {convo.name}
-          </a> */}
         </li>
       )}
     </ul>
+    <CreateConversation />
   </aside>
 }

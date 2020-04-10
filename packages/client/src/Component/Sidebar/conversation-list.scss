@@ -4,7 +4,7 @@ aside.conversations-container {
   grid-column: line1 /  middle;
   width: 250px;
   display: grid;
-  grid-template-rows: [first-line] 100px [middle] auto [last-line];
+  grid-template-rows: [first-line] 100px [middle] auto [third-line] 75px [last-line];
   height: 100%;
   h2 {
     grid-row: first-line / middle;
@@ -12,7 +12,7 @@ aside.conversations-container {
     align-items: center;
     font-size: 1.75rem;
     font-weight: 700;
-    font-family: 'Playfair Display', serif;
+    // font-family: 'Playfair Display', serif;
     color: $textGrey;
     padding: 20px 10px;
     border-bottom: 1px solid $grey;
@@ -38,7 +38,6 @@ aside.conversations-container {
   .conversations {
     margin-top: 20px;
     li {
-      // padding: 15px 10px;
       border: 1px solid transparent;
       transition: all 0.2s ease-in-out;
       margin-bottom: 5px;

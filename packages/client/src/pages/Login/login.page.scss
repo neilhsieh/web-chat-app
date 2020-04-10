@@ -1,0 +1,51 @@
+@import '../../styles/variables.scss';
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $grey;
+  form {
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px;
+    width: 400px;
+    *{
+      display: block;
+      width: 100%;
+    }
+    h1 {
+      line-height: 1.2;
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    input,
+    button {
+      line-height: 35px;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+    input {
+      padding: 0 15px;
+      border-color: $grey;
+    }
+    button {
+      line-height: 35px;
+      background-color: $textGrey;
+      color: white;
+      text-transform: uppercase;
+      border-radius: 30px;
+      padding: 5px 15px;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.85;
+      }
+    }
+  }
+  .error-message {
+    color: red;
+    margin: 10px 0;
+  }
+}

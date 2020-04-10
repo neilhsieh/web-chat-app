@@ -8,8 +8,17 @@
 }
 
 body {
+  h1, h2, h3, h4, h5 {
+    font-family: 'Playfair Display', serif;
+  }
   font-family: 'Open Sans', sans-serif;
   #app {
     height: 100vh;
+  }
+
+  input {
+    border-radius: 25px;
+    border-width: 2px;
+    border-style: solid;
   }
 }

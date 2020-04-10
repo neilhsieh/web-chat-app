@@ -1,0 +1,83 @@
+@import "../../styles/variables.scss";
+
+.modal-page-container {
+  &.closed {
+    display: none;
+  }
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.01);
+  transition: all 0.2s ease-in-out;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  &.opened {
+    background-color: rgba(128, 128, 128, 0.5);
+    .modal-popup {
+      opacity: 1;
+    }
+  }
+  .modal-popup {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    width: 450px;
+    height: 250px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    h2 {
+      border-bottom: 0;
+    }
+    form {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 0 10px;
+      height: 100%;
+      input {
+        width: 100%;
+        margin-top: 25px;
+        line-height: 40px;
+        padding: 0 20px;
+        font-size: 16px;
+      }
+      .button-group {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 10px;
+        button {
+          font-size: 14px;
+          line-height: 36px;
+          padding: 0 15px;
+          border-radius: 20px;
+          margin-left: 10px;
+          &.submit {
+            border: none;
+            background-color: $textGrey;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+          }
+          &.close-modal {
+            border: none;
+            background-color: $grey;
+            color: $textGrey;
+            text-transform: uppercase;
+          }
+          &:hover {
+            opacity: 0.8;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

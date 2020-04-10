@@ -12,7 +12,9 @@ export interface Message {
   userId: string;
 }
 
-// export interface ConversationList {
-//   content: string;
-//   userId: string;
-// };
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+}

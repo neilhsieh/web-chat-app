@@ -21,7 +21,7 @@
       display: flex;
       align-items: center;
       padding: 5px 20px;
-      font-family: 'Playfair Display', serif;
+      // font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
       font-weight: 700;
       color: $textGrey;
@@ -65,7 +65,8 @@
           background-color: $ltGreen;
           font-size: 14px;
           border-radius: 100%;
-          border: 1px solid $ltGreen;
+          // border: 1px solid $ltGreen;
+          border-color: $ltGreen;
           transition: all 0.15s ease-in-out;
           &:hover {
             cursor: pointer;
