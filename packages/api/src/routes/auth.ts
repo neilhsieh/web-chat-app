@@ -33,6 +33,7 @@ authRouter.post('/login', async (req, res, _next) => {
   const token = jwt.sign(userData, JWT_SECRET);
 
   res.json({
-    token
+    token,
+    userId: user.id
   });
-})
+});

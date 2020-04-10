@@ -1,12 +1,11 @@
 import { RequestHandler } from 'express';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../config';
-import { json } from 'sequelize/types';
 
 export const middlewareAuth: RequestHandler = (req, res, next) => {
   const bearer = req.headers.authorization;
 
-  const throwError = (error: string, code = 400) => {
+  const throwError = (error: string, code = 401) => {
     res.status(code);
     res.json({
       error
@@ -21,7 +20,7 @@ export const middlewareAuth: RequestHandler = (req, res, next) => {
   const token = regex.exec(bearer)![1];
 
   try {
-    jwt.verify(token, JWT_SECRET);
+    res.locals.user = jwt.verify(token, JWT_SECRET);
   } catch (e) {
     return throwError('Invalid JWT');
   }

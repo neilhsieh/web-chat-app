@@ -10,6 +10,7 @@ import { sequelize } from './database';
 import bodyParser from 'body-parser';
 import { convoRouter } from './routes/conversations';
 import { authRouter } from './routes/auth';
+import { meRouter } from './routes/me';
 
 
 const run = async () => {
@@ -43,8 +44,9 @@ const run = async () => {
   // Defining a NEW PIPE
   app.use('/auth', authRouter);
   app.use('/users', middlewareAuth, usersRouter);
-  app.use('/conversations', convoRouter);
-  app.use('/messages', messagesRouter);
+  app.use('/me', middlewareAuth, meRouter);
+  app.use('/conversations', middlewareAuth, convoRouter);
+  app.use('/messages', middlewareAuth, messagesRouter);
 
   // Running the web server on port 9999
   app.listen(9999);

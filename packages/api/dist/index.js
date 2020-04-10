@@ -13,6 +13,7 @@ const database_1 = require("./database");
 const body_parser_1 = __importDefault(require("body-parser"));
 const conversations_1 = require("./routes/conversations");
 const auth_2 = require("./routes/auth");
+const me_1 = require("./routes/me");
 const run = async () => {
     // Created an INSTANCE of an API
     const app = express_1.default();
@@ -41,8 +42,9 @@ const run = async () => {
     // Defining a NEW PIPE
     app.use('/auth', auth_2.authRouter);
     app.use('/users', auth_1.middlewareAuth, users_1.usersRouter);
-    app.use('/conversations', conversations_1.convoRouter);
-    app.use('/messages', messages_1.messagesRouter);
+    app.use('/me', auth_1.middlewareAuth, me_1.meRouter);
+    app.use('/conversations', auth_1.middlewareAuth, conversations_1.convoRouter);
+    app.use('/messages', auth_1.middlewareAuth, messages_1.messagesRouter);
     // Running the web server on port 9999
     app.listen(9999);
     console.log('API running on http://localhost:9999');
