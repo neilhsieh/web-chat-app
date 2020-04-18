@@ -6,6 +6,7 @@ aside.conversations-container {
   display: grid;
   grid-template-rows: [first-line] 100px [middle] auto [third-line] 75px [last-line];
   height: 100%;
+  max-height: 100vh;
   h2 {
     grid-row: first-line / middle;
     display: flex;
@@ -37,6 +38,8 @@ aside.conversations-container {
   }
   .conversations {
     margin-top: 20px;
+    overflow: scroll;
+    max-height: calc(100vh - 75px - 100px);
     li {
       border: 1px solid transparent;
       transition: all 0.2s ease-in-out;

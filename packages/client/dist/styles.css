@@ -66,7 +66,8 @@ aside.conversations-container {
   width: 250px;
   display: grid;
   grid-template-rows: [first-line] 100px [middle] auto [third-line] 75px [last-line];
-  height: 100%; }
+  height: 100%;
+  max-height: 100vh; }
   aside.conversations-container h2 {
     grid-row: first-line / middle;
     display: flex;
@@ -92,7 +93,9 @@ aside.conversations-container {
         -o-transform: skew(-13deg);
         background-color: rgba(211, 211, 211, 0.6); }
   aside.conversations-container .conversations {
-    margin-top: 20px; }
+    margin-top: 20px;
+    overflow: scroll;
+    max-height: calc(100vh - 75px - 100px); }
     aside.conversations-container .conversations li {
       border: 1px solid transparent;
       transition: all 0.2s ease-in-out;
@@ -271,7 +274,7 @@ aside.conversations-container {
     .login-page form h1 {
       line-height: 1.2;
       margin-bottom: 20px;
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 700; }
     .login-page form input,
     .login-page form button {

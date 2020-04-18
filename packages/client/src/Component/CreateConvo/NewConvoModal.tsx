@@ -7,11 +7,15 @@ import { Redirect } from 'react-router';
 // import { Conversation } from '../../lib/types';
 
 // import { api } from '../../lib/API';
-export interface ToggleProp {
+export interface ConvoProp {
   toggle: boolean;
+  // createNewConvo: (convo: Conversation) => void;
 }
 
-export const NewConvoModal: React.FC<ToggleProp> = ({ toggle }) => {
+
+export const NewConvoModal: React.FC<ConvoProp> = ({
+  toggle,
+}) => {
 
   const [opened, updateOpened] = useState<Boolean>(false);
   const [convo, updateConvo] = useState<Conversation>();

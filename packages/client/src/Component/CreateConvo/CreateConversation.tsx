@@ -13,7 +13,7 @@ export const CreateConversation = () => {
   const openModal = () => {
     updateOpened(!opened);
     // <NewConvoModal toggle={opened} />;
-  }
+  };
 
   return <>
     <button className="create-convo-button" onClick={openModal}>
@@ -23,3 +23,4 @@ export const CreateConversation = () => {
     <NewConvoModal toggle={opened} />
   </>
 }
+
