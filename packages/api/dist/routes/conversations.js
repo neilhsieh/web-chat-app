@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const Conversation_1 = require("../models/Conversation");
+const authConversation_1 = require("../middleware/authConversation");
 exports.convoRouter = express_1.Router();
 // Get a list of conversations
 exports.convoRouter.get('/', async (_req, res, _next) => {
@@ -11,7 +12,7 @@ exports.convoRouter.get('/', async (_req, res, _next) => {
     res.json(conversations);
 });
 // Get one conversation
-exports.convoRouter.get('/:conversationID', async (req, res, _next) => {
+exports.convoRouter.get('/:conversationID', authConversation_1.middlewareConvo, async (req, res, _next) => {
     const { conversationID } = req.params;
     const conversation = await Conversation_1.Conversation.findByPk(conversationID);
     res.json(conversation);
@@ -21,6 +22,7 @@ exports.convoRouter.post('/', async (req, res, next) => {
     try {
         const conversation = new Conversation_1.Conversation(req.body); // NOTE: THIS IS DANGEROUS
         await conversation.save();
+        await conversation.$add('user', res.locals.user.id);
         res.json(conversation);
     }
     catch (e) {
@@ -28,7 +30,7 @@ exports.convoRouter.post('/', async (req, res, next) => {
     }
 });
 // Update conversation
-exports.convoRouter.patch('/:conversationID', async (req, res, next) => {
+exports.convoRouter.patch('/:conversationID', authConversation_1.middlewareConvo, async (req, res, next) => {
     try {
         await Conversation_1.Conversation.update(req.body, {
             where: { id: req.params.conversationID },
@@ -42,7 +44,7 @@ exports.convoRouter.patch('/:conversationID', async (req, res, next) => {
     }
 });
 // Delete Conversation
-exports.convoRouter.delete('/:conversationID', async (req, res, next) => {
+exports.convoRouter.delete('/:conversationID', authConversation_1.middlewareConvo, async (req, res, next) => {
     try {
         Conversation_1.Conversation.destroy({
             where: { id: req.params.conversationID }
@@ -56,7 +58,7 @@ exports.convoRouter.delete('/:conversationID', async (req, res, next) => {
     }
 });
 // Get list of messages in conversation
-exports.convoRouter.get('/:conversationID/messages', async (req, res, next) => {
+exports.convoRouter.get('/:conversationID/messages', authConversation_1.middlewareConvo, async (req, res, next) => {
     // Get Conversation
     const { conversationID } = req.params;
     const conversation = await Conversation_1.Conversation.findByPk(conversationID);

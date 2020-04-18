@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { Conversation } from '../models/Conversation';
+import { middlewareConvo } from '../middleware/authConversation';
 
 export const convoRouter = Router();
 
@@ -13,7 +14,7 @@ convoRouter.get('/', async (_req, res, _next) => {
 });
 
 // Get one conversation
-convoRouter.get('/:conversationID', async (req, res, _next) => {
+convoRouter.get('/:conversationID', middlewareConvo, async (req, res, _next) => {
   const { conversationID } = req.params;
   const conversation = await Conversation.findByPk(conversationID);
   res.json(conversation);
@@ -24,6 +25,7 @@ convoRouter.post('/', async (req, res, next) => {
   try {
     const conversation = new Conversation(req.body); // NOTE: THIS IS DANGEROUS
     await conversation.save();
+    await conversation.$add('user', res.locals.user.id);
     res.json(conversation);
   } catch (e) {
     next(e);
@@ -31,7 +33,7 @@ convoRouter.post('/', async (req, res, next) => {
 });
 
 // Update conversation
-convoRouter.patch('/:conversationID', async (req, res, next) => {
+convoRouter.patch('/:conversationID', middlewareConvo, async (req, res, next) => {
   try {
     await Conversation.update(req.body, {
       where: { id: req.params.conversationID },
@@ -45,7 +47,7 @@ convoRouter.patch('/:conversationID', async (req, res, next) => {
 });
 
 // Delete Conversation
-convoRouter.delete('/:conversationID', async (req, res, next) => {
+convoRouter.delete('/:conversationID', middlewareConvo, async (req, res, next) => {
   try {
     Conversation.destroy({
       where: { id: req.params.conversationID }
@@ -59,7 +61,7 @@ convoRouter.delete('/:conversationID', async (req, res, next) => {
 });
 
 // Get list of messages in conversation
-convoRouter.get('/:conversationID/messages', async (req, res, next) => {
+convoRouter.get('/:conversationID/messages', middlewareConvo, async (req, res, next) => {
   // Get Conversation
   const { conversationID } = req.params;
   const conversation = await Conversation.findByPk(conversationID);

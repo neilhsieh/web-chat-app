@@ -2,11 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const Message_1 = require("../models/Message");
+const checkUserConvo_1 = require("../lib/checkUserConvo");
 exports.messagesRouter = express_1.Router();
 // Create a message
 exports.messagesRouter.post('/', async (req, res, next) => {
     try {
-        const message = new Message_1.Message(req.body); // NOTE: THIS IS DANGEROUS
+        // console.log(res.locals.user.id, req.body.convoId)
+        await checkUserConvo_1.checkUserConvo(res.locals.user.id, req.body.conversationId);
+        const { content, userId, conversationId } = req.body;
+        const message = new Message_1.Message({ content, userId, conversationId }); // NOTE: THIS IS DANGEROUS
         await message.save();
         res.json(message);
     }
