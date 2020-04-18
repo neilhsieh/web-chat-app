@@ -7,6 +7,7 @@ export const convoRouter = Router();
 convoRouter.get('/', async (_req, res, _next) => {
   // fetch all conversations
   const conversations = await Conversation.findAll();
+
   // send through pipe
   res.json(conversations);
 });
