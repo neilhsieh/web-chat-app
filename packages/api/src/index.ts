@@ -12,10 +12,15 @@ import { convoRouter } from './routes/conversations';
 import { authRouter } from './routes/auth';
 import { meRouter } from './routes/me';
 
+import { createServer } from 'http';
+
+import io from 'socket.io';
+import sockets from './lib/sockets';
 
 const run = async () => {
   // Created an INSTANCE of an API
   const app = express();
+  const http = createServer(app);
 
   /**
    * Each middleware takes 3 parameters
@@ -48,9 +53,18 @@ const run = async () => {
   app.use('/conversations', middlewareAuth, convoRouter);
   app.use('/messages', middlewareAuth, messagesRouter);
 
+  // Initialize socket.io
+  const socket = io.listen(http);
+  sockets(socket);
+
   // Running the web server on port 9999
-  app.listen(9999);
-  console.log('API running on http://localhost:9999');
+  // app.listen(9999);
+  const port = process.env.PORT || 9999;
+
+  http.listen(port, () => {
+    console.log(`API running on http://localhost:${port}`);
+  });
+  // console.log('API running on http://localhost:9999');
 };
 
 run();

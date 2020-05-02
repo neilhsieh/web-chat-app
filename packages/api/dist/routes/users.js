@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const User_1 = require("../models/User");
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const sequelize_1 = require("sequelize");
 exports.usersRouter = express_1.Router();
 // CRUD of the User in REST API
 // Get list of users
@@ -14,6 +15,27 @@ exports.usersRouter.get('/', async (_req, res) => {
     const users = await User_1.User.findAll();
     // Send them in the pipe
     res.json(users);
+});
+// Search for a user
+exports.usersRouter.get('/search', async (req, res, next) => {
+    const query = req.query.q;
+    try {
+        const users = await User_1.User.findAll({
+            where: {
+                firstName: {
+                    [sequelize_1.Op.like]: `%${query}%`
+                }
+            }
+        });
+        res.json(users.map(u => ({
+            id: u.id,
+            firstName: u.firstName,
+            lastName: u.lastName
+        })));
+    }
+    catch (e) {
+        next(e);
+    }
 });
 // Get ONE user
 exports.usersRouter.get('/:userID', async (req, res) => {

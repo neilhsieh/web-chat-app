@@ -14,9 +14,13 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const conversations_1 = require("./routes/conversations");
 const auth_2 = require("./routes/auth");
 const me_1 = require("./routes/me");
+const http_1 = require("http");
+const socket_io_1 = __importDefault(require("socket.io"));
+const sockets_1 = __importDefault(require("./lib/sockets"));
 const run = async () => {
     // Created an INSTANCE of an API
     const app = express_1.default();
+    const http = http_1.createServer(app);
     /**
      * Each middleware takes 3 parameters
      * 1. Request
@@ -45,9 +49,16 @@ const run = async () => {
     app.use('/me', auth_1.middlewareAuth, me_1.meRouter);
     app.use('/conversations', auth_1.middlewareAuth, conversations_1.convoRouter);
     app.use('/messages', auth_1.middlewareAuth, messages_1.messagesRouter);
+    // Initialize socket.io
+    const socket = socket_io_1.default.listen(http);
+    sockets_1.default(socket);
     // Running the web server on port 9999
-    app.listen(9999);
-    console.log('API running on http://localhost:9999');
+    // app.listen(9999);
+    const port = process.env.PORT || 9999;
+    http.listen(port, () => {
+        console.log(`API running on http://localhost:${port}`);
+    });
+    // console.log('API running on http://localhost:9999');
 };
 run();
 //# sourceMappingURL=index.js.map
