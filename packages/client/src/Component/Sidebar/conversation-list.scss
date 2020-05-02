@@ -13,7 +13,6 @@ aside.conversations-container {
     align-items: center;
     font-size: 1.75rem;
     font-weight: 700;
-    // font-family: 'Playfair Display', serif;
     color: $textGrey;
     padding: 20px 10px;
     border-bottom: 1px solid $grey;
@@ -38,7 +37,7 @@ aside.conversations-container {
   }
   .conversations {
     margin-top: 20px;
-    overflow: scroll;
+    overflow-y: auto;
     max-height: calc(100vh - 75px - 100px);
     li {
       border: 1px solid transparent;

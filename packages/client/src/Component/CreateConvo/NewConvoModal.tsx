@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import { api } from '../../lib/API';
 import { Conversation } from '../../lib/types';
 import { Redirect } from 'react-router';
+import { Conversations } from '../../containers/conversations.container';
 // import { Conversation } from '../../lib/types';
 
 // import { api } from '../../lib/API';
@@ -18,7 +19,10 @@ export const NewConvoModal: React.FC<ConvoProp> = ({
 }) => {
 
   const [opened, updateOpened] = useState<Boolean>(false);
+
   const [convo, updateConvo] = useState<Conversation>();
+  const { conversations, createConversation } = Conversations.useContainer();
+
   const input = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -51,7 +55,8 @@ export const NewConvoModal: React.FC<ConvoProp> = ({
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    const newConvo = await api.createConvo(input.current?.value!);
+    // const newConvo = await api.createConvo(input.current?.value!);
+    const newConvo = await createConversation(input.current?.value!);
     updateConvo(newConvo);
   };
 

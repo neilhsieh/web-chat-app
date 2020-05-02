@@ -6,16 +6,11 @@ import { Conversation } from '../../lib/types';
 import { api } from '../../lib/API';
 import { Link } from 'react-router-dom';
 import { CreateConversation } from '../CreateConvo/CreateConversation';
+import { Conversations } from '../../containers/conversations.container'
 
 export const ConversationList = () => {
 
-  const [convos, updateConvos] = useState<Conversation[]>([]);
-
-  const loadConversations = async () => {
-    const conversations = await api.getConversations();
-    if (!conversations) return;
-    updateConvos(conversations);
-  };
+  const { conversations, loadConversations } = Conversations.useContainer();
 
   useEffect(() => {
     loadConversations();
@@ -24,7 +19,7 @@ export const ConversationList = () => {
   return <aside className="conversations-container">
     <h2><span>Your Convos</span></h2>
     <ul className="conversations">
-      {convos.map((convo, i) =>
+      {conversations.map((convo, i) =>
         <li key={i} className={
           convo.id === window.location.href.split('/').pop() ? "selected" : ""
         }>

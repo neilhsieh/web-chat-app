@@ -94,7 +94,7 @@ aside.conversations-container {
         background-color: rgba(211, 211, 211, 0.6); }
   aside.conversations-container .conversations {
     margin-top: 20px;
-    overflow: scroll;
+    overflow-y: auto;
     max-height: calc(100vh - 75px - 100px); }
     aside.conversations-container .conversations li {
       border: 1px solid transparent;

@@ -3,12 +3,12 @@ import './createConvo.scss';
 import React, { useState, useEffect } from 'react';
 
 import { NewConvoModal } from './NewConvoModal';
-
+import { Modal } from '../Modal/Modal';
 
 export const CreateConversation = () => {
 
   // const [convos, updateConvos] = useState<Conversation[]>([]);
-  const [opened, updateOpened] = useState<Boolean>(false);
+  const [opened, updateOpened] = useState<boolean>(false);
 
   const openModal = () => {
     updateOpened(!opened);
@@ -20,7 +20,9 @@ export const CreateConversation = () => {
       <i className="fas fa-plus"></i>
       Convo
     </button>
-    <NewConvoModal toggle={opened} />
+    <Modal >
+      <NewConvoModal toggle={opened} />
+    </Modal>
   </>
 }
 
