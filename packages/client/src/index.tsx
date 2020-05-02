@@ -7,6 +7,8 @@ import { AppRouter } from './Router/Router';
 import { useContainer } from 'unstated-next';
 import { Conversations } from './containers/conversations.container';
 
+import './lib/sockets';
+
 (async () =>
   ReactDOM.render(
     <Conversations.Provider>
