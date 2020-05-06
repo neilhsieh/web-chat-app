@@ -9,6 +9,8 @@ import { SendMessage } from './SendMessage';
 import { ConversationList } from '../../Component/Sidebar/ConversationList';
 import { CreateConversation } from '../../Component/CreateConvo/CreateConversation';
 
+import { AddUser } from '../../modals/AddUserToConvo/AddUser';
+
 export const ConversationPage = () => {
   const params = useParams<Params>();
 
@@ -35,6 +37,7 @@ export const ConversationPage = () => {
       <header>{convo
         ? <h1>{convo.name} </h1>
         : <h1>Conversation page</h1>}
+        <AddUser />
       </header>
       <ul className="messages">
 

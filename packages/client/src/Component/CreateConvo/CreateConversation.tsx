@@ -10,19 +10,20 @@ export const CreateConversation = () => {
   // const [convos, updateConvos] = useState<Conversation[]>([]);
   const [opened, updateOpened] = useState<boolean>(false);
 
-  const openModal = () => {
+  useEffect(() => {
+    // console.log('clicked', opened);
+  }, [opened]);
+
+  const toggleOpened = () => {
     updateOpened(!opened);
     // <NewConvoModal toggle={opened} />;
   };
 
   return <>
-    <button className="create-convo-button" onClick={openModal}>
+    <button className="create-convo-button" onClick={toggleOpened}>
       <i className="fas fa-plus"></i>
       Convo
     </button>
-    <Modal >
-      <NewConvoModal toggle={opened} />
-    </Modal>
-  </>
-}
-
+    <NewConvoModal toggle={{ opened, toggleOpened }} />
+  </>;
+};

@@ -1,0 +1,31 @@
+#modal {
+  > .modal {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.01);
+    transition: all 0.2s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+
+    .modal-popup {
+      width: 450px;
+      height: 250px;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    &.opened {
+      background-color: rgba(128, 128, 128, 0.5);
+      display: flex;
+      top: 0;
+      left: 0;
+      opacity: 1;
+      
+    }
+  }
+}

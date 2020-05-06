@@ -2,14 +2,19 @@ import './newConvoModal.scss';
 
 import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import { api } from '../../lib/API';
-import { Conversation } from '../../lib/types';
+import { Conversation, ToggleModalProp } from '../../lib/types';
 import { Redirect } from 'react-router';
 import { Conversations } from '../../containers/conversations.container';
+import { Modal } from '../Modal/Modal';
 // import { Conversation } from '../../lib/types';
 
 // import { api } from '../../lib/API';
 export interface ConvoProp {
-  toggle: boolean;
+  // toggle: {
+  //   opened: boolean,
+  //   openModal: () => void
+  // };
+  toggle: ToggleModalProp;
   // createNewConvo: (convo: Conversation) => void;
 }
 
@@ -18,7 +23,7 @@ export const NewConvoModal: React.FC<ConvoProp> = ({
   toggle,
 }) => {
 
-  const [opened, updateOpened] = useState<Boolean>(false);
+  const [opened, updateOpened] = useState<boolean>(false);
 
   const [convo, updateConvo] = useState<Conversation>();
   const { conversations, createConversation } = Conversations.useContainer();
@@ -26,31 +31,15 @@ export const NewConvoModal: React.FC<ConvoProp> = ({
   const input = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    updateOpened(!opened);
-    classToggle();
+    // updateOpened(!opened);
+    // classToggle();
   }, [toggle]);
 
-  const classToggle = () => {
-    const modalContainer = document.querySelector('.modal-page-container');
-    if (opened) {
-      modalContainer!.classList.remove('closed');
-      modalContainer!.style.display = 'flex';
-      setTimeout(() => {
-        modalContainer!.classList.add('opened');
-      }, 50);
-    } else {
-      modalContainer!.classList.remove('opened');
-      setTimeout(() => {
-        modalContainer!.classList.add('closed');
-        modalContainer!.style.display = 'none';
-      }, 200);
-    }
-  };
 
   const clickEvent = (e: FormEvent) => {
     e.preventDefault();
-    updateOpened(!opened);
-    classToggle();
+    // updateOpened(!opened);
+    // classToggle();
   };
 
   const submit = async (e: FormEvent) => {
@@ -60,10 +49,17 @@ export const NewConvoModal: React.FC<ConvoProp> = ({
     updateConvo(newConvo);
   };
 
-  if (convo) return <Redirect to={`/convo/${convo.id}`} />;
+  // if (convo) return <Redirect to={`/convo/${convo.id}`} />;
 
-  return <div className="modal-page-container closed" onClick={clickEvent}>
-    <div className="modal-popup" onClick={e => e.stopPropagation()}>
+  return <Modal
+    title="Start a new Convo!"
+    toggle={toggle}
+    // onClose={clickEvent}
+    className="new-convo-modal"
+
+  >
+
+    {/* <div className="modal-page-container closed" onClick={clickEvent}>
       <h2>Start a new Convo!</h2>
 
       <form action="" onSubmit={submit}>
@@ -80,6 +76,7 @@ export const NewConvoModal: React.FC<ConvoProp> = ({
         </div>
       </form>
 
-    </div>
-  </div>
+
+    </div> */}
+  </Modal>
 };

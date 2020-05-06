@@ -152,9 +152,57 @@ aside.conversations-container {
     background-color: rgba(128, 128, 128, 0.5); }
     .modal-page-container.opened .modal-popup {
       opacity: 1; }
-  .modal-page-container .modal-popup {
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
+  .modal-page-container .modal-popup h2 {
+    border-bottom: 0; }
+  .modal-page-container .modal-popup form {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 0 10px;
+    height: 100%; }
+    .modal-page-container .modal-popup form input {
+      width: 100%;
+      margin-top: 25px;
+      line-height: 40px;
+      padding: 0 20px;
+      font-size: 16px; }
+    .modal-page-container .modal-popup form .button-group {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 10px; }
+      .modal-page-container .modal-popup form .button-group button {
+        font-size: 14px;
+        line-height: 36px;
+        padding: 0 15px;
+        border-radius: 20px;
+        margin-left: 10px; }
+        .modal-page-container .modal-popup form .button-group button.submit {
+          border: none;
+          background-color: #222;
+          color: white;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-weight: bold; }
+        .modal-page-container .modal-popup form .button-group button.close-modal {
+          border: none;
+          background-color: rgba(211, 211, 211, 0.6);
+          color: #222;
+          text-transform: uppercase; }
+        .modal-page-container .modal-popup form .button-group button:hover {
+          opacity: 0.8;
+          cursor: pointer; }
+
+#modal > .modal {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.01);
+  transition: all 0.2s ease-in-out;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; }
+  #modal > .modal .modal-popup {
     width: 450px;
     height: 250px;
     background-color: white;
@@ -162,45 +210,12 @@ aside.conversations-container {
     flex-direction: column;
     padding: 20px;
     border-radius: 10px; }
-    .modal-page-container .modal-popup h2 {
-      border-bottom: 0; }
-    .modal-page-container .modal-popup form {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      padding: 0 10px;
-      height: 100%; }
-      .modal-page-container .modal-popup form input {
-        width: 100%;
-        margin-top: 25px;
-        line-height: 40px;
-        padding: 0 20px;
-        font-size: 16px; }
-      .modal-page-container .modal-popup form .button-group {
-        display: flex;
-        justify-content: flex-end;
-        margin-bottom: 10px; }
-        .modal-page-container .modal-popup form .button-group button {
-          font-size: 14px;
-          line-height: 36px;
-          padding: 0 15px;
-          border-radius: 20px;
-          margin-left: 10px; }
-          .modal-page-container .modal-popup form .button-group button.submit {
-            border: none;
-            background-color: #222;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold; }
-          .modal-page-container .modal-popup form .button-group button.close-modal {
-            border: none;
-            background-color: rgba(211, 211, 211, 0.6);
-            color: #222;
-            text-transform: uppercase; }
-          .modal-page-container .modal-popup form .button-group button:hover {
-            opacity: 0.8;
-            cursor: pointer; }
+  #modal > .modal.opened {
+    background-color: rgba(128, 128, 128, 0.5);
+    display: flex;
+    top: 0;
+    left: 0;
+    opacity: 1; }
 
 .conversation-page {
   display: grid;
@@ -256,6 +271,20 @@ aside.conversations-container {
           .conversation-page main.conversation .new-message form .submit:hover {
             cursor: pointer;
             background-color: #b3ead6; }
+
+.new-user-modal {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  transition: all 0.2s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center; }
+  .new-user-modal.opened {
+    display: flex;
+    background-color: rgba(128, 128, 128, 0.5); }
 
 .login-page {
   display: flex;

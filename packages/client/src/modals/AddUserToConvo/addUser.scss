@@ -1,0 +1,17 @@
+.new-user-modal {
+  display: none;
+  &.opened {
+    display: flex;
+    background-color: rgba(128, 128, 128, 0.5);
+  }
+  width: 100vw;
+  height: 100vh;
+  // background-color: rgba(128, 128, 128, 0.01);
+  transition: all 0.2s ease-in-out;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+}

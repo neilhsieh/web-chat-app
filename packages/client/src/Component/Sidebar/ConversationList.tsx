@@ -6,7 +6,7 @@ import { Conversation } from '../../lib/types';
 import { api } from '../../lib/API';
 import { Link } from 'react-router-dom';
 import { CreateConversation } from '../CreateConvo/CreateConversation';
-import { Conversations } from '../../containers/conversations.container'
+import { Conversations } from '../../containers/conversations.container';
 
 export const ConversationList = () => {
 

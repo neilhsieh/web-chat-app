@@ -18,3 +18,10 @@ export interface User {
   lastName: string;
   email: string;
 }
+
+export interface ToggleModalProp {
+  /* Modal open state from class calling Modal */
+  opened: boolean;
+  /* Modal set state/useState from class calling Modal */
+  toggleOpened: () => void;
+}
