@@ -9,7 +9,7 @@ import { SendMessage } from './SendMessage';
 import { ConversationList } from '../../Component/Sidebar/ConversationList';
 import { CreateConversation } from '../../Component/CreateConvo/CreateConversation';
 
-import { AddUser } from '../../modals/AddUserToConvo/AddUser';
+import { AddUser } from '../../Component/AddUser/AddUser';
 
 export const ConversationPage = () => {
   const params = useParams<Params>();

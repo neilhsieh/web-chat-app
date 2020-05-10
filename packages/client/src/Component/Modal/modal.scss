@@ -12,12 +12,19 @@
 
     .modal-popup {
       width: 450px;
-      height: 250px;
+      min-height: 250px;
       background-color: white;
       display: flex;
       flex-direction: column;
       padding: 20px;
       border-radius: 10px;
+
+      h2 {
+        font-size:24px;
+        padding: 20px 0;
+      }
+
+      
     }
     &.opened {
       background-color: rgba(128, 128, 128, 0.5);

@@ -6,6 +6,27 @@ class API {
 
   prefix = 'http://localhost:9999';
 
+  createUser = async (
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ) => {
+    try {
+      const res = this.request('post', '/auth/signup', {
+        firstName, lastName, email, password
+      });
+      return res;
+    } catch (e) {
+      console.log('error', e)
+      return e;
+    }
+  }
+
+  searchUser = async (queryString: string) => {
+    return this.request('get', `/users/search?q=${queryString}`);
+  }
+
   login = async (email: string, password: string) => {
     try {
       const res = await axios.post(`${this.prefix}/auth/login/`, {
@@ -25,22 +46,10 @@ class API {
 
   getConversation = async (convoId: string) => {
     return this.request('get', `/conversations/${convoId}`);
-    // try {
-    //   const res = await axios.get(`${this.prefix}/conversations/${convoId}`);
-    //   return res.data;
-    // } catch (e) {
-    //   return null;
-    // }
   }
 
   getMessages = async (convoId: string) => {
     return this.request('get', `/conversations/${convoId}/messages`);
-    // try {
-    //   const res = await axios.get(`${this.prefix}/conversations/${convoId}/messages`);
-    //   return res.data;
-    // } catch (e) {
-    //   return null;
-    // }
   }
 
   createMessage = async (
@@ -58,12 +67,6 @@ class API {
 
   getConversations = async () => {
     return this.request('get', '/conversations');
-    // try {
-    //   const res = await axios.get(`${this.prefix}/conversations`);
-    //   return res.data;
-    // } catch (e) {
-    //   return null;
-    // }
   }
 
   createConvo = async (

@@ -53,7 +53,8 @@ table {
 body {
   font-family: 'Open Sans', sans-serif; }
   body h1, body h2, body h3, body h4, body h5 {
-    font-family: 'Playfair Display', serif; }
+    font-family: 'Playfair Display', serif;
+    font-weight: 700; }
   body #app {
     height: 100vh; }
   body input {
@@ -73,7 +74,6 @@ aside.conversations-container {
     display: flex;
     align-items: center;
     font-size: 1.75rem;
-    font-weight: 700;
     color: #222;
     padding: 20px 10px;
     border-bottom: 1px solid rgba(211, 211, 211, 0.6); }
@@ -135,62 +135,45 @@ aside.conversations-container {
     color: white;
     cursor: pointer; }
 
-.modal-page-container {
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(128, 128, 128, 0.01);
-  transition: all 0.2s ease-in-out;
-  position: absolute;
-  top: 0;
-  left: 0;
+.new-convo-modal .modal-popup h2 {
+  border-bottom: 0; }
+
+.new-convo-modal .modal-popup form {
   display: flex;
-  justify-content: center;
-  align-items: center; }
-  .modal-page-container.closed {
-    display: none; }
-  .modal-page-container.opened {
-    background-color: rgba(128, 128, 128, 0.5); }
-    .modal-page-container.opened .modal-popup {
-      opacity: 1; }
-  .modal-page-container .modal-popup h2 {
-    border-bottom: 0; }
-  .modal-page-container .modal-popup form {
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%; }
+  .new-convo-modal .modal-popup form input {
+    width: 100%;
+    margin: 25px 0;
+    line-height: 40px;
+    padding: 0 20px;
+    font-size: 16px; }
+  .new-convo-modal .modal-popup form .button-group {
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    padding: 0 10px;
-    height: 100%; }
-    .modal-page-container .modal-popup form input {
-      width: 100%;
-      margin-top: 25px;
-      line-height: 40px;
-      padding: 0 20px;
-      font-size: 16px; }
-    .modal-page-container .modal-popup form .button-group {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 10px; }
-      .modal-page-container .modal-popup form .button-group button {
-        font-size: 14px;
-        line-height: 36px;
-        padding: 0 15px;
-        border-radius: 20px;
-        margin-left: 10px; }
-        .modal-page-container .modal-popup form .button-group button.submit {
-          border: none;
-          background-color: #222;
-          color: white;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          font-weight: bold; }
-        .modal-page-container .modal-popup form .button-group button.close-modal {
-          border: none;
-          background-color: rgba(211, 211, 211, 0.6);
-          color: #222;
-          text-transform: uppercase; }
-        .modal-page-container .modal-popup form .button-group button:hover {
-          opacity: 0.8;
-          cursor: pointer; }
+    justify-content: flex-end;
+    margin-bottom: 10px; }
+    .new-convo-modal .modal-popup form .button-group button {
+      font-size: 14px;
+      line-height: 36px;
+      padding: 0 15px;
+      border-radius: 20px;
+      margin-left: 10px; }
+      .new-convo-modal .modal-popup form .button-group button.submit {
+        border: none;
+        background-color: #222;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold; }
+      .new-convo-modal .modal-popup form .button-group button.close-modal {
+        border: none;
+        background-color: rgba(211, 211, 211, 0.6);
+        color: #222;
+        text-transform: uppercase; }
+      .new-convo-modal .modal-popup form .button-group button:hover {
+        opacity: 0.8;
+        cursor: pointer; }
 
 #modal > .modal {
   display: none;
@@ -204,12 +187,15 @@ aside.conversations-container {
   opacity: 0; }
   #modal > .modal .modal-popup {
     width: 450px;
-    height: 250px;
+    min-height: 250px;
     background-color: white;
     display: flex;
     flex-direction: column;
     padding: 20px;
     border-radius: 10px; }
+    #modal > .modal .modal-popup h2 {
+      font-size: 24px;
+      padding: 20px 0; }
   #modal > .modal.opened {
     background-color: rgba(128, 128, 128, 0.5);
     display: flex;
@@ -286,44 +272,66 @@ aside.conversations-container {
     display: flex;
     background-color: rgba(128, 128, 128, 0.5); }
 
-.login-page {
+
+.auth-page {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background-color: rgba(211, 211, 211, 0.6); }
-  .login-page form {
+  .auth-page form {
     background-color: white;
     border-radius: 10px;
     padding: 40px;
     width: 400px; }
-    .login-page form * {
-      display: block;
-      width: 100%; }
-    .login-page form h1 {
+    .auth-page form h1 {
       line-height: 1.2;
       margin-bottom: 20px;
-      font-size: 24px;
-      font-weight: 700; }
-    .login-page form input,
-    .login-page form button {
+      font-size: 24px; }
+    .auth-page form input,
+    .auth-page form button {
       line-height: 35px;
       font-size: 16px;
       margin-top: 20px; }
-    .login-page form input {
+    .auth-page form input {
+      display: block;
+      width: 100%;
       padding: 0 15px;
       border-color: rgba(211, 211, 211, 0.6); }
-    .login-page form button {
+    .auth-page form button {
       line-height: 35px;
       background-color: #222;
       color: white;
       text-transform: uppercase;
       border-radius: 30px;
       padding: 5px 15px; }
-      .login-page form button:hover {
+      .auth-page form button:hover {
         cursor: pointer;
         opacity: 0.85; }
-  .login-page .error-message {
-    color: red;
-    margin: 10px 0; }
+
+.sign-up-page .button-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px; }
+  .sign-up-page .button-group button {
+    font-size: 14px;
+    line-height: 36px;
+    padding: 0 15px;
+    border-radius: 20px;
+    margin-left: 10px; }
+    .sign-up-page .button-group button.submit {
+      border: none;
+      background-color: #222;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold; }
+    .sign-up-page .button-group button.close {
+      border: none;
+      background-color: rgba(211, 211, 211, 0.6);
+      color: #222;
+      text-transform: uppercase; }
+    .sign-up-page .button-group button:hover {
+      opacity: 0.8;
+      cursor: pointer; }
 

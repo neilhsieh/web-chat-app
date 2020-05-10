@@ -1,7 +1,8 @@
 import './login.page.scss';
+import '../../styles/auth-pages.scss';
 import { api } from '../../lib/API';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, FormEvent } from 'react';
 import { Redirect } from 'react-router';
 
 
@@ -12,7 +13,7 @@ export const LoginPage = () => {
   const [error, setError] = useState<boolean>();
   const [loggedIn, setLoggedIn] = useState<boolean>();
 
-  const login = async (e) => {
+  const login = async (e: FormEvent) => {
     e.preventDefault();
 
     setError(false);
@@ -21,11 +22,11 @@ export const LoginPage = () => {
     if (!data) setError(true);
     setLoggedIn(true);
     localStorage.setItem('token', data.token);
-  }
+  };
 
   if (loggedIn) return <Redirect to="/" />;
 
-  return <main className="login-page">
+  return <main className="login-page auth-page">
     <form onSubmit={login}>
       <h1>Login Page</h1>
       {error && <span className="error-message">Invalid login credentials</span>}

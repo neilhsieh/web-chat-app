@@ -80,10 +80,10 @@ export class Modal extends Component<Props, State> {
   }
 
 
-  closeModal = (e: FormEvent) => {
-    e.preventDefault();
-    this.props.toggle?.toggleOpened();
-  }
+  // closeModal = (e: FormEvent) => {
+  //   e.preventDefault();
+  //   this.props.toggle?.toggleOpened();
+  // }
 
   render() {
     return ReactDOM.createPortal(
@@ -92,8 +92,8 @@ export class Modal extends Component<Props, State> {
         <div className="modal-popup">
           <h2>{this.props.title}</h2>
           <div className="modal-content">{this.props.children}</div>
-          <button className="close-modal" onClick={this.closeModal}
-          >Cancel</button>
+          {/* <button className="close-modal" onClick={this.closeModal}
+          >Cancel</button> */}
 
         </div>
       </>,
