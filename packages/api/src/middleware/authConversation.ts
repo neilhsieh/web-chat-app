@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { UserConversation } from '../models/UserConversation';
+// import { UserConversation } from '../models/UserConversation';
 import { checkUserConvo } from '../lib/checkUserConvo';
 
 export const middlewareConvo: RequestHandler = async (req, res, next) => {

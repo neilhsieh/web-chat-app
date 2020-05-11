@@ -1,11 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const User_1 = require("../models/User");
-const bcrypt_1 = __importDefault(require("bcrypt"));
 const sequelize_1 = require("sequelize");
 exports.usersRouter = express_1.Router();
 // CRUD of the User in REST API
@@ -37,28 +33,27 @@ exports.usersRouter.get('/search', async (req, res, next) => {
         next(e);
     }
 });
-// Get ONE user
+// Get ONE user by ID
 exports.usersRouter.get('/:userID', async (req, res) => {
     const { userID } = req.params;
     const user = await User_1.User.findByPk(userID);
     res.json(user);
 });
-// Create a user
-exports.usersRouter.post('/', async (req, res, next) => {
-    try {
-        const { password: plainPass, ...userData } = req.body;
-        const salt = bcrypt_1.default.genSaltSync(10);
-        const password = bcrypt_1.default.hashSync(plainPass, salt);
-        const user = new User_1.User({
-            ...userData, password
-        }); // NOTE: THIS IS DANGEROUS
-        await user.save();
-        res.json(user);
-    }
-    catch (e) {
-        next(e);
-    }
-});
+// // Create a user
+// usersRouter.post('/', async (req, res, next) => {
+//   try {
+//     const { password: plainPass, ...userData } = req.body;
+//     const salt = bcrypt.genSaltSync(10);
+//     const password = bcrypt.hashSync(plainPass, salt);
+//     const user = new User({
+//       ...userData, password
+//     }); // NOTE: THIS IS DANGEROUS
+//     await user.save();
+//     res.json(user);
+//   } catch (e) {
+//     next(e);
+//   }
+// });
 // Update a user
 exports.usersRouter.patch('/:userID', async (req, res, next) => {
     try {

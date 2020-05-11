@@ -37,3 +37,32 @@ authRouter.post('/login', async (req, res, _next) => {
     userId: user.id
   });
 });
+
+// Create a user
+authRouter.post('/signup', async (req, res, next) => {
+  const { password: plainPass, email, ...userData } = req.body;
+  const user = await User.findOne({
+    where: { email }
+  });
+
+  const throwError = () => {
+    res.json({
+      error: 'Please use a different email.'
+    });
+  };
+
+  if (user) return throwError();
+
+  try {
+    const salt = bcrypt.genSaltSync(10);
+    const password = bcrypt.hashSync(plainPass, salt);
+    const user = new User({
+      ...userData, email, password
+    }); // NOTE: THIS IS DANGEROUS
+    await user.save();
+    res.json(user);
+  } catch (e) {
+    next(e);
+  }
+});
+

@@ -1,4 +1,4 @@
-import { Router, response } from 'express';
+import { Router } from 'express';
 import { User } from '../models/User';
 import bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
@@ -36,7 +36,7 @@ usersRouter.get('/search', async (req, res, next) => {
   }
 });
 
-// Get ONE user
+// Get ONE user by ID
 usersRouter.get('/:userID', async (req, res) => {
   const { userID } = req.params;
 
@@ -44,23 +44,24 @@ usersRouter.get('/:userID', async (req, res) => {
   res.json(user);
 });
 
-// Create a user
-usersRouter.post('/', async (req, res, next) => {
 
-  try {
-    const { password: plainPass, ...userData } = req.body;
-    const salt = bcrypt.genSaltSync(10);
-    const password = bcrypt.hashSync(plainPass, salt);
-    const user = new User({
-      ...userData, password
-    }); // NOTE: THIS IS DANGEROUS
-    await user.save();
+// // Create a user
+// usersRouter.post('/', async (req, res, next) => {
 
-    res.json(user);
-  } catch (e) {
-    next(e);
-  }
-});
+//   try {
+//     const { password: plainPass, ...userData } = req.body;
+//     const salt = bcrypt.genSaltSync(10);
+//     const password = bcrypt.hashSync(plainPass, salt);
+//     const user = new User({
+//       ...userData, password
+//     }); // NOTE: THIS IS DANGEROUS
+//     await user.save();
+
+//     res.json(user);
+//   } catch (e) {
+//     next(e);
+//   }
+// });
 
 // Update a user
 usersRouter.patch('/:userID', async (req, res, next) => {
