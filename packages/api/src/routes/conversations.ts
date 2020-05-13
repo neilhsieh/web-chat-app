@@ -1,13 +1,21 @@
 import { Router } from 'express';
 import { Conversation } from '../models/Conversation';
 import { middlewareConvo } from '../middleware/authConversation';
+import { User } from '../models/User';
 
 export const convoRouter = Router();
 
 // Get a list of conversations
 convoRouter.get('/', async (_req, res, _next) => {
   // fetch all conversations
-  const conversations = await Conversation.findAll();
+  const userId = res.locals.user.id;
+
+  const conversations = await Conversation.findAll({
+    include: [{
+      model: User,
+      where: { id: userId }
+    }]
+  });
 
   // send through pipe
   res.json(conversations);
@@ -16,6 +24,7 @@ convoRouter.get('/', async (_req, res, _next) => {
 // Get one conversation
 convoRouter.get('/:conversationID', middlewareConvo, async (req, res, _next) => {
   const { conversationID } = req.params;
+
   const conversation = await Conversation.findByPk(conversationID);
   res.json(conversation);
 });

@@ -3,11 +3,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const Conversation_1 = require("../models/Conversation");
 const authConversation_1 = require("../middleware/authConversation");
+const User_1 = require("../models/User");
 exports.convoRouter = express_1.Router();
 // Get a list of conversations
 exports.convoRouter.get('/', async (_req, res, _next) => {
     // fetch all conversations
-    const conversations = await Conversation_1.Conversation.findAll();
+    const userId = res.locals.user.id;
+    const conversations = await Conversation_1.Conversation.findAll({
+        include: [{
+                model: User_1.User,
+                where: { id: userId }
+            }]
+    });
     // send through pipe
     res.json(conversations);
 });
