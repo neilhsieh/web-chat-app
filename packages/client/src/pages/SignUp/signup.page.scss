@@ -1,6 +1,27 @@
 @import '../../styles/variables.scss';
 
 .sign-up-page {
+  form {
+    h1 {
+      margin-bottom: 30px;
+    }
+    .error-message {
+      color: red;
+      span {
+        &:not(:first-child) {
+          margin-left: 5px;
+        }
+        &:not(:last-child) {
+          &:after {
+            content: ',';
+          }
+        }
+      }
+    }
+  }
+  .input-fields {
+    // margin-top: 10px;
+  }
   .button-group {
     display: flex;
     justify-content: flex-end;

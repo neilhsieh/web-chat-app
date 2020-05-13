@@ -3,7 +3,6 @@ import './createConvo.scss';
 import React, { useState, useEffect } from 'react';
 
 import { NewConvoModal } from '../../modals/NewConvoModal/NewConvoModal';
-import { Modal } from '../Modal/Modal';
 
 export const CreateConversation = () => {
 

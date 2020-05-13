@@ -65,6 +65,10 @@ class API {
     });
   }
 
+  addUserToConvo = async (conversationId: string, userId: string) => {
+    return this.request('post', `/conversations/${conversationId}/add-user`, { userId });
+  }
+
   getConversations = async () => {
     return this.request('get', '/conversations');
   }

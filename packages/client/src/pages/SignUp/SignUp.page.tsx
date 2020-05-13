@@ -1,5 +1,5 @@
+import '../../styles/auth-pages.scss';
 import './signup.page.scss';
-import '../../styles/auth-pages.scss'
 
 import React, { useRef, useState, FormEvent } from 'react';
 import { api } from '../../lib/API';
@@ -64,13 +64,14 @@ export const SignUpPage = () => {
       {missingFields ? <div className="error-message missing-fields">{
         missingFields.map((field, key) =>
           <span key={key}>{field}</span>
-        )} field(s) is missing</div> : <div></div>}
+        )} field(s) is missing.</div> : <div></div>}
       {error && <span className="error-message">Invalid login credentials</span>}
-
-      <input type="text" name="First Name" placeholder="First Name" ref={fName} required />
-      <input type="text" name="Last Name" placeholder="Last Name" ref={lName} required />
-      <input type="text" name="Email" placeholder="Email" ref={email} required />
-      <input type="text" name="Password" placeholder="Password" ref={password} required />
+      <div className="input-fields">
+        <input type="text" name="First Name" placeholder="First Name" ref={fName} required />
+        <input type="text" name="Last Name" placeholder="Last Name" ref={lName} required />
+        <input type="text" name="Email" placeholder="Email" ref={email} required />
+        <input type="text" name="Password" placeholder="Password" ref={password} required />
+      </div>
       <div className="button-group">
         <button className="submit" type="submit" onClick={createNewUser}>Create!</button>
       </div>

@@ -19,8 +19,6 @@ export const NewConvoModal: React.FC<AddConvoProp> = ({
   toggle,
 }) => {
 
-  // const [opened, updateOpened] = useState<boolean>(false);
-
   const [convo, updateConvo] = useState<Conversation>();
   const { conversations, createConversation } = Conversations.useContainer();
 
@@ -29,28 +27,18 @@ export const NewConvoModal: React.FC<AddConvoProp> = ({
   useEffect(() => {
   }, [toggle]);
 
-
-  // const clickEvent = (e: FormEvent) => {
-  //   e.preventDefault();
-  //   toggle?.toggleOpened();
-  //   // updateOpened(!opened);
-  //   // classToggle();
-  // };
-
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    // const newConvo = await api.createConvo(input.current?.value!);
     const newConvo = await createConversation(input.current?.value!);
     updateConvo(newConvo);
   };
 
-  // if (convo) return <Redirect to={`/convo/${convo.id}`} />;
+  if (convo) return <Redirect to={`/convo/${convo.id}`} />;
 
   return <Modal
     title="Start a new Convo!"
     toggle={toggle}
     className="new-convo-modal"
-
   >
     <form action="" onSubmit={submit}>
 
@@ -65,6 +53,5 @@ export const NewConvoModal: React.FC<AddConvoProp> = ({
         <button className="close-modal" onClick={toggle?.toggleOpened}>Cancel</button>
       </div>
     </form>
-
   </Modal>
 };

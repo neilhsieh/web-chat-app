@@ -7,6 +7,10 @@ aside.conversations-container {
   grid-template-rows: [first-line] 100px [middle] auto [third-line] 75px [last-line];
   height: 100%;
   max-height: 100vh;
+  
+  padding: 0 10px;
+  
+
   h2 {
     grid-row: first-line / middle;
     display: flex;

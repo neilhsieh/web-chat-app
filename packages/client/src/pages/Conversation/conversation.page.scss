@@ -4,15 +4,7 @@
   display: grid;
   grid-template-columns: [line1] 250px [middle] auto [last-line] ;
   height: 100%;
-  // grid-template-columns: [all-convo] 250px [ind-convo] auto [line3] ;
-  // grid-template-rows: [first-line] 100px [convo-start] auto [send-messages-line]  75px [last-line];
 
-  & > * {
-    padding: 0 10px;
-  }
-
-  
-  
   main.conversation {
     grid-column: middle / last-line;
     display: grid;
@@ -21,11 +13,27 @@
       display: flex;
       align-items: center;
       padding: 5px 20px;
-      // font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
       font-weight: 700;
       color: $textGrey;
       background-color: $ltGreen;
+      justify-content: space-between;
+
+      button {
+        background-color: transparent;
+        color: $textGrey;
+        font-size: 24px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid $textGrey;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          cursor: pointer;
+          color: white;
+          background-color: $textGrey;
+          border: 1px solid transparent;
+        }
+      }
     }    
     ul.messages {
       padding: 10px 20px; 

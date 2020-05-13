@@ -1,4 +1,4 @@
-// import './addUser.scss';
+import './newUserModal.scss';
 
 import React, { useState, FormEvent } from 'react';
 import { Modal } from '../../Component/Modal/Modal';
@@ -32,7 +32,6 @@ export const NewUserModal: React.FC<AddUserProp> = ({
     updateAddUser([...addUser, u]);
 
   };
-  console.log(addUser);
 
   return <Modal
     title="Add new users:"
@@ -44,9 +43,13 @@ export const NewUserModal: React.FC<AddUserProp> = ({
         <ul>{searchedUsers.map(u =>
           <li><a onClick={e => { updateUsers(u, e); }}> {u.firstName} + </a></li>
         )}</ul>
-
-        <button className="submit" type="submit">Add User</button>
-        <button className="close-modal" onClick={toggle?.toggleOpened}>Cancel</button>
+        <div className="button-group">
+          <button className="submit" type="submit">Add User</button>
+          <button className="close-modal" onClick={e => {
+            e.preventDefault();
+            toggle?.toggleOpened;
+          }}>Cancel</button>
+        </div>
       </form>
     </div>
   </Modal>

@@ -62,13 +62,17 @@ body {
     border-width: 2px;
     border-style: solid; }
 
+.home-page {
+  height: 100%; }
+
 aside.conversations-container {
   grid-column: line1 /  middle;
   width: 250px;
   display: grid;
   grid-template-rows: [first-line] 100px [middle] auto [third-line] 75px [last-line];
   height: 100%;
-  max-height: 100vh; }
+  max-height: 100vh;
+  padding: 0 10px; }
   aside.conversations-container h2 {
     grid-row: first-line / middle;
     display: flex;
@@ -207,8 +211,6 @@ aside.conversations-container {
   display: grid;
   grid-template-columns: [line1] 250px [middle] auto [last-line];
   height: 100%; }
-  .conversation-page > * {
-    padding: 0 10px; }
   .conversation-page main.conversation {
     grid-column: middle / last-line;
     display: grid;
@@ -220,7 +222,21 @@ aside.conversations-container {
       font-size: 2.5rem;
       font-weight: 700;
       color: #222;
-      background-color: rgba(179, 234, 214, 0.35); }
+      background-color: rgba(179, 234, 214, 0.35);
+      justify-content: space-between; }
+      .conversation-page main.conversation header button {
+        background-color: transparent;
+        color: #222;
+        font-size: 24px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #222;
+        transition: all 0.3s ease-in-out; }
+        .conversation-page main.conversation header button:hover {
+          cursor: pointer;
+          color: white;
+          background-color: #222;
+          border: 1px solid transparent; }
     .conversation-page main.conversation ul.messages {
       padding: 10px 20px;
       overflow: scroll; }
@@ -272,6 +288,36 @@ aside.conversations-container {
     display: flex;
     background-color: rgba(128, 128, 128, 0.5); }
 
+.new-user-modal .modal-popup {
+  min-height: 400px;
+  max-height: 80%; }
+
+.new-user-modal .button-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px; }
+  .new-user-modal .button-group button {
+    font-size: 14px;
+    line-height: 36px;
+    padding: 0 15px;
+    border-radius: 20px;
+    margin-left: 10px; }
+    .new-user-modal .button-group button.submit {
+      border: none;
+      background-color: #222;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold; }
+    .new-user-modal .button-group button.close-modal {
+      border: none;
+      background-color: rgba(211, 211, 211, 0.6);
+      color: #222;
+      text-transform: uppercase; }
+    .new-user-modal .button-group button:hover {
+      opacity: 0.8;
+      cursor: pointer; }
+
 
 .auth-page {
   display: flex;
@@ -308,6 +354,16 @@ aside.conversations-container {
       .auth-page form button:hover {
         cursor: pointer;
         opacity: 0.85; }
+
+.sign-up-page form h1 {
+  margin-bottom: 30px; }
+
+.sign-up-page form .error-message {
+  color: red; }
+  .sign-up-page form .error-message span:not(:first-child) {
+    margin-left: 5px; }
+  .sign-up-page form .error-message span:not(:last-child):after {
+    content: ','; }
 
 .sign-up-page .button-group {
   display: flex;

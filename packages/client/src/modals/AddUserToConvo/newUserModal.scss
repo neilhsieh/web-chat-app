@@ -1,0 +1,38 @@
+@import '../../styles/variables.scss';
+
+.new-user-modal {
+  .modal-popup {
+    min-height: 400px;
+    max-height: 80%;
+  }
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    button {
+      font-size: 14px;
+      line-height: 36px;
+      padding: 0 15px;
+      border-radius: 20px;
+      margin-left: 10px;
+      &.submit {
+        border: none;
+        background-color: $textGrey;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+      }
+      &.close-modal {
+        border: none;
+        background-color: $grey;
+        color: $textGrey;
+        text-transform: uppercase;
+      }
+      &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+      }
+    }
+  }
+}

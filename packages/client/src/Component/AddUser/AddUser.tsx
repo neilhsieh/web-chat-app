@@ -14,7 +14,7 @@ export const AddUser = () => {
 
   return <div className="add-user-convo">
     <button onClick={toggleOpened}>
-      + AddUser
+      <i className="fas fa-user-plus"></i>
     </button>
 
 

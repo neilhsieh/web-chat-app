@@ -1,37 +1,8 @@
 @import "../../styles/variables.scss";
 
 .new-convo-modal {
-  // &.closed {
-  //   display: none;
-  // }
-  // width: 100vw;
-  // height: 100vh;
-  // background-color: rgba(128, 128, 128, 0.01);
-  // transition: all 0.2s ease-in-out;
-
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-
-  // &.opened {
-  //   background-color: rgba(128, 128, 128, 0.5);
-  //   .modal-popup {
-  //     opacity: 1;
-  //   }
-  // }
   .modal-popup {
-    // opacity: 0;
-    // transition: opacity 0.2s ease-in-out;
-    // width: 450px;
-    // height: 250px;
-    // background-color: white;
-    // display: flex;
-    // flex-direction: column;
-    // padding: 20px;
-    // border-radius: 10px;
+
     h2 {
       border-bottom: 0;
     }
