@@ -75,4 +75,17 @@ exports.convoRouter.get('/:conversationID/messages', authConversation_1.middlewa
     const messages = await conversation.$get('messages');
     res.json(messages);
 });
+// Get list of messages in conversation
+exports.convoRouter.post('/:conversationID/add-user', authConversation_1.middlewareConvo, async (req, res, next) => {
+    // Get Conversation
+    const { conversationID } = req.params;
+    const conversation = await Conversation_1.Conversation.findByPk(conversationID);
+    if (!conversation)
+        return next(new Error('No conversations with that id'));
+    // Add user to convo
+    await conversation.$add('user', res.locals.user.id);
+    res.json({
+        data: true
+    });
+});
 //# sourceMappingURL=conversations.js.map
