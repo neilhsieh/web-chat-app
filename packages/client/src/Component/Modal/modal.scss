@@ -1,5 +1,5 @@
 #modal {
-  > .modal {
+  .modal {
     display: none;
     position: fixed;
     width: 100vw;
@@ -24,7 +24,24 @@
         padding: 20px 0;
       }
 
-      
+      input {
+        width: 100%;
+        margin: 20px 0 10px;
+        line-height: 40px;
+        padding: 0 20px;
+        font-size: 16px;
+      }
+      .modal-content {
+        flex-grow: 1;
+        display: flex;
+        > form {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
+          height: auto;
+          width: 100%;
+        }
+      }
     }
     &.opened {
       background-color: rgba(128, 128, 128, 0.5);

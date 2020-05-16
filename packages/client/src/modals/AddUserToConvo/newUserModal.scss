@@ -4,11 +4,73 @@
   .modal-popup {
     min-height: 400px;
     max-height: 80%;
+    position: relative;
+  }
+
+  .modal-content {
+    flex-direction: column;
+    .users-to-add {
+      ul li {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: $textGrey;
+        color: white;
+        border-radius: 20px;  
+        margin-right: 10px;
+        margin-bottom: 10px;
+        .fa-times {
+          font-size: 14px;
+          margin-left: 5px;
+        }
+        &:hover {
+          opacity: 0.8;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  
+  form {
+    ul {
+      display: flex;
+      flex-direction: column;
+      // max modal height - h2 height - input height - modal padding height - buttons height
+      max-height: calc(80vh - 74px - 64px - 46px - 40px); 
+      overflow-y: auto;
+      padding: 0 10px 20px;
+      li {
+        display: flex;
+        justify-content: space-between;
+        line-height: 22px;
+        padding: 10px 10px;
+        border-radius: 4px;
+        background-color: white;
+        transition: all 0.2s ease-in-out;
+        a {
+          color: $textGrey;
+          transition: color 0.2s ease-in-out;
+        }
+        i {
+          font-size: 14px;
+          color: $textGrey;
+          line-height: 22px;
+        }
+        &:hover {
+          background-color: $grey;
+          cursor: pointer;
+          a {
+            color: black;
+          }
+        }
+
+      }
+    }
   }
   .button-group {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 10px;
+
     button {
       font-size: 14px;
       line-height: 36px;

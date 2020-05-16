@@ -10,12 +10,12 @@ export const CreateConversation = () => {
   const [opened, updateOpened] = useState<boolean>(false);
 
   useEffect(() => {
-    // console.log('clicked', opened);
+    console.log('clicked', opened);
+
   }, [opened]);
 
   const toggleOpened = () => {
     updateOpened(!opened);
-    // <NewConvoModal toggle={opened} />;
   };
 
   return <>

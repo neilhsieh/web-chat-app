@@ -6,6 +6,8 @@ import { Conversation, ToggleModalProp } from '../../lib/types';
 import { Redirect } from 'react-router';
 import { Conversations } from '../../containers/conversations.container';
 import { Modal } from '../../Component/Modal/Modal';
+import { useHistory } from "react-router-dom";
+
 // import { Conversation } from '../../lib/types';
 
 // import { api } from '../../lib/API';
@@ -31,27 +33,36 @@ export const NewConvoModal: React.FC<AddConvoProp> = ({
     e.preventDefault();
     const newConvo = await createConversation(input.current?.value!);
     updateConvo(newConvo);
+    toggle?.toggleOpened();
   };
 
-  if (convo) return <Redirect to={`/convo/${convo.id}`} />;
+  const redirectFunc = () => {
+    const convoId = convo?.id;
+    // Prevents multiple running of this function
+    if (window.location.href.includes(`${convoId}`)) return;
+    input!.current!.value = '';
+    return <Redirect to={`/convo/${convoId}`} />;
+  };
 
-  return <Modal
-    title="Start a new Convo!"
-    toggle={toggle}
-    className="new-convo-modal"
-  >
-    <form action="" onSubmit={submit}>
-
-      <input
-        name="name"
-        type="text"
-        placeholder="Name your convo..."
-        ref={input}
-      />
-      <div className="button-group">
-        <button className="submit" type="submit" >Start</button>
-        <button className="close-modal" onClick={toggle?.toggleOpened}>Cancel</button>
-      </div>
-    </form>
-  </Modal>
+  return <>
+    <Modal
+      title="Start a new Convo!"
+      toggle={toggle}
+      className="new-convo-modal"
+    >
+      <form action="" onSubmit={submit}>
+        <input
+          name="name"
+          type="text"
+          placeholder="Name your convo..."
+          ref={input}
+        />
+        <div className="button-group">
+          <button className="submit" type="submit" >Start</button>
+          <button className="close-modal" type="button" onClick={toggle?.toggleOpened}>Cancel</button>
+        </div>
+      </form>
+    </Modal>
+    {convo ? redirectFunc() : null}
+  </>
 };
