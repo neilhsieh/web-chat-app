@@ -7,7 +7,6 @@ export const checkUserConvo = async (userId: string, conversationId: string) => 
       conversationId
     }
   });
-
   if (!exists) throw new Error('You do not have permission to that conversation');
   return true;
 };
