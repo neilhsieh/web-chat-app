@@ -57,6 +57,8 @@ class API {
     message: string,
   ) => {
     const uId = await getMe();
+    console.log(uId);
+
     // const userId = '09545d62-5d38-4ab7-b47f-74326ee7ff4d';
     return this.request('post', '/messages', {
       content: message,

@@ -29,11 +29,16 @@ export const NewConvoModal: React.FC<AddConvoProp> = ({
   useEffect(() => {
   }, [toggle]);
 
+  const loadMe = async () => {
+    await api.me();
+  };
+
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     const newConvo = await createConversation(input.current?.value!);
     updateConvo(newConvo);
     toggle?.toggleOpened();
+    loadMe();
   };
 
   const redirectFunc = () => {

@@ -5,10 +5,15 @@ import React, { useState, FormEvent, useRef, useEffect } from 'react';
 import { Modal } from '../../Component/Modal/Modal';
 import { ToggleModalProp, User } from '../../lib/types';
 import { api } from '../../lib/API';
+import { useParams } from 'react-router';
 
 interface AddUserProp {
   toggle: ToggleModalProp;
   // createNewConvo: (convo: Conversation) => void;
+}
+
+interface Params {
+  conversationId: string;
 }
 
 export const NewUserModal: React.FC<AddUserProp> = ({
@@ -17,9 +22,9 @@ export const NewUserModal: React.FC<AddUserProp> = ({
 
   const [searchedUsers, setSearchedUsers] = useState<User[]>([]);
   const [selectedUser, updateSelectedUser] = useState<User[]>([]);
-  // const [userModalOpen, setUserModalOpen] = useState<boolean>(false);
 
   const usersList = useRef(null);
+  const params = useParams<Params>();
 
 
   useEffect(() => {
@@ -29,8 +34,6 @@ export const NewUserModal: React.FC<AddUserProp> = ({
   const searchUser = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchUser = await api.searchUser(e.target.value);
     const sWS = searchWithoutSelected(searchUser);
-    console.log('sWS', sWS);
-
     setSearchedUsers(sWS);
   };
 
@@ -45,8 +48,11 @@ export const NewUserModal: React.FC<AddUserProp> = ({
     return searchedWithoutSelected;
   };
 
-  const submit = () => {
-    // const 
+  const submit = async (e: FormEvent) => {
+    e.preventDefault();
+    const newUser = await api.addUserToConvo(params.conversationId, selectedUser[0].id);
+    console.log(newUser);
+
   };
 
   const updateUsers = (u: User) => {
@@ -80,7 +86,7 @@ export const NewUserModal: React.FC<AddUserProp> = ({
           {u.firstName} {u.lastName} <i className="fas fa-plus"></i></li>
       )}</ul>
       <div className="button-group">
-        <button className="submit" type="submit">Add User</button>
+        <button className="submit" type="submit" >Add User</button>
         <button className="close-modal" type="button" onClick={
           toggle?.toggleOpened
         }>Cancel</button>

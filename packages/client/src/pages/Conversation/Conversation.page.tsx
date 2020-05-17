@@ -1,7 +1,7 @@
 import './conversation.page.scss';
 import { Params, Conversation, Message } from '../../lib/types';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router';
 
 import { api } from '../../lib/API';
@@ -10,25 +10,36 @@ import { ConversationList } from '../../Component/Sidebar/ConversationList';
 import { CreateConversation } from '../../Component/CreateConvo/CreateConversation';
 
 import { AddUser } from '../../Component/AddUser/AddUser';
+import { joinRoom } from '../../lib/sockets';
+import { Messages } from '../../containers/messages.container';
 
 export const ConversationPage = () => {
   const params = useParams<Params>();
 
   const [convo, updateConvo] = useState<Conversation>();
-  const [messages, updateMessages] = useState<Message[]>([]);
-  // const [currentConvo, updateCurrentConvo] = useState<Conversation>();
+
+  const { messages, loadMessages } = Messages.useContainer();
 
   const loadInitialData = async () => {
     const conversation = await api.getConversation(params.conversationId);
     if (!conversation) return;
-    const messages = await api.getMessages(params.conversationId);
+    // const messages = await api.getMessages(params.conversationId);
     updateConvo(conversation);
-    updateMessages(messages);
+    loadMessages(params.conversationId);
   };
 
   useEffect(() => {
     loadInitialData();
-  }, [params.conversationId]);
+    joinRoom(params.conversationId);
+  }, [params.conversationId]
+  );
+
+  const convoMessages = useMemo(
+    () => messages[params.conversationId] || [],
+    [params.conversationId, messages]
+  );
+
+  if (convoMessages) console.log(convoMessages);
 
   return <div className="conversation-page">
     <ConversationList />
@@ -41,7 +52,7 @@ export const ConversationPage = () => {
       </header>
       <ul className="messages">
 
-        {messages.map((message, i) =>
+        {convoMessages.map((message, i) =>
           <li key={i} >
             <span>{message.content}</span>
           </li>
@@ -50,9 +61,6 @@ export const ConversationPage = () => {
       <div className="new-message">
         <SendMessage
           conversationId={params.conversationId}
-          onNewMessage={message => {
-            updateMessages(m => [...m, message]);
-          }}
         />
       </div>
     </main>

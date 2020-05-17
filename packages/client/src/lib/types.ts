@@ -10,6 +10,8 @@ export interface Params {
 export interface Message {
   content: string;
   userId: string;
+  conversationId: string;
+
 }
 
 export interface User {

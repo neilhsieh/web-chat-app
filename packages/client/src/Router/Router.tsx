@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Router, Switch } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Route, Router, Switch, useParams } from 'react-router-dom';
 
 import { HomePage } from '../pages/Home/Home.page';
 import { history } from './history';
@@ -7,13 +7,16 @@ import { ConversationPage } from '../pages/Conversation/Conversation.page';
 import { LoginPage } from '../pages/Login/Login.page';
 import { SignUpPage } from '../pages/SignUp/SignUp.page';
 import { api } from '../lib/API';
+import { Params } from '../lib/types';
 
 export const AppRouter = () => {
 
   const [loading, setLoading] = useState(true);
-
+  // const convo = useRef();
   const loadMe = async () => {
     await api.me();
+    console.log('setting me');
+
     setLoading(false);
   };
 
