@@ -2,7 +2,7 @@
 
 aside.conversations-container {
   grid-column: line1 /  middle;
-  width: 250px;
+  width: 100%;
   display: grid;
   grid-template-rows: [first-line] 100px [middle] auto [third-line] 75px [last-line];
   height: 100%;

@@ -63,11 +63,22 @@ body {
     border-style: solid; }
 
 .home-page {
-  height: 100%; }
+  display: grid;
+  height: 100%;
+  grid-template-columns: [line1] 250px [middle] auto [last-line]; }
+  .home-page .welcome-screen {
+    grid-column: middle / last-line;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0 20px; }
 
 aside.conversations-container {
   grid-column: line1 /  middle;
-  width: 250px;
+  width: 100%;
   display: grid;
   grid-template-rows: [first-line] 100px [middle] auto [third-line] 75px [last-line];
   height: 100%;
@@ -213,7 +224,7 @@ aside.conversations-container {
 
 .conversation-page {
   display: grid;
-  grid-template-columns: [line1] 250px [middle] auto [last-line];
+  grid-template-columns: [line1] 275px [middle] auto [last-line];
   height: 100%; }
   .conversation-page main.conversation {
     grid-column: middle / last-line;
@@ -245,13 +256,18 @@ aside.conversations-container {
       padding: 10px 20px;
       overflow: scroll; }
       .conversation-page main.conversation ul.messages li {
+        display: flex;
         padding: 3px 0; }
         .conversation-page main.conversation ul.messages li span {
           display: inline-block;
           border-radius: 25px;
-          background-color: #b3ead6;
+          background-color: rgba(211, 211, 211, 0.6);
           padding: 13px;
           font-weight: 300; }
+      .conversation-page main.conversation ul.messages .my-message {
+        justify-content: flex-end; }
+        .conversation-page main.conversation ul.messages .my-message span {
+          background-color: #b3ead6; }
     .conversation-page main.conversation .new-message {
       padding: 15px 20px; }
       .conversation-page main.conversation .new-message form {

@@ -12,6 +12,7 @@ import { CreateConversation } from '../../Component/CreateConvo/CreateConversati
 import { AddUser } from '../../Component/AddUser/AddUser';
 import { joinRoom } from '../../lib/sockets';
 import { Messages } from '../../containers/messages.container';
+import { CurrentUser } from '../../containers/me.container';
 
 export const ConversationPage = () => {
   const params = useParams<Params>();
@@ -19,6 +20,7 @@ export const ConversationPage = () => {
   const [convo, updateConvo] = useState<Conversation>();
 
   const { messages, loadMessages } = Messages.useContainer();
+  const { me } = CurrentUser.useContainer();
 
   const loadInitialData = async () => {
     const conversation = await api.getConversation(params.conversationId);
@@ -31,15 +33,13 @@ export const ConversationPage = () => {
   useEffect(() => {
     loadInitialData();
     joinRoom(params.conversationId);
-  }, [params.conversationId]
+  }, [params.conversationId, me]
   );
 
   const convoMessages = useMemo(
     () => messages[params.conversationId] || [],
     [params.conversationId, messages]
   );
-
-  if (convoMessages) console.log(convoMessages);
 
   return <div className="conversation-page">
     <ConversationList />
@@ -53,7 +53,9 @@ export const ConversationPage = () => {
       <ul className="messages">
 
         {convoMessages.map((message, i) =>
-          <li key={i} >
+          <li key={i}
+            className={message.userId === me?.id ? 'my-message' : ''}
+          >
             <span>{message.content}</span>
           </li>
         )}

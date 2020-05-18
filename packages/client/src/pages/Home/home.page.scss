@@ -1,3 +1,15 @@
 .home-page {
+  display: grid;
   height: 100%;
+  grid-template-columns: [line1] 250px [middle] auto [last-line] ;
+  .welcome-screen {
+    grid-column: middle / last-line;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0 20px;
+  }
 }

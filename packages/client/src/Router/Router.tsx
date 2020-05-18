@@ -8,15 +8,17 @@ import { LoginPage } from '../pages/Login/Login.page';
 import { SignUpPage } from '../pages/SignUp/SignUp.page';
 import { api } from '../lib/API';
 import { Params } from '../lib/types';
+import { CurrentUser } from '../containers/me.container';
 
 export const AppRouter = () => {
 
   const [loading, setLoading] = useState(true);
+  const { settingMe } = CurrentUser.useContainer();
+
   // const convo = useRef();
   const loadMe = async () => {
     await api.me();
-    console.log('setting me');
-
+    settingMe();
     setLoading(false);
   };
 

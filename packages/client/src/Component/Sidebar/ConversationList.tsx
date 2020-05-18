@@ -7,17 +7,26 @@ import { api } from '../../lib/API';
 import { Link } from 'react-router-dom';
 import { CreateConversation } from '../CreateConvo/CreateConversation';
 import { Conversations } from '../../containers/conversations.container';
+import { getMe } from '../../config';
+import { CurrentUser } from '../../containers/me.container';
 
 export const ConversationList = () => {
 
   const { conversations, loadConversations } = Conversations.useContainer();
-
+  // const [me, setMe] = useState<string>();
+  const { me } = CurrentUser.useContainer();
   useEffect(() => {
     loadConversations();
+    gettingMe();
+
   }, []);
 
+  const gettingMe = async () => {
+    const me = await getMe();
+  };
+
   return <aside className="conversations-container">
-    <h2><span>Your Convos</span></h2>
+    <h2><span>{me?.firstName ? `${me.firstName}'s Convos` : null} </span></h2>
     <ul className="conversations">
       {conversations.map((convo, i) =>
         <li key={i} className={

@@ -24,17 +24,20 @@ export const NewUserModal: React.FC<AddUserProp> = ({
   const [selectedUser, updateSelectedUser] = useState<User[]>([]);
 
   const usersList = useRef(null);
+  const selectedUsers = useRef(null);
   const params = useParams<Params>();
 
 
   useEffect(() => {
     setSearchedUsers(searchWithoutSelected(searchedUsers));
+    if (selectedUser.length > 0) {
+      adjustUserListHeight();
+    }
   }, [selectedUser]);
 
   const searchUser = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchUser = await api.searchUser(e.target.value);
-    const sWS = searchWithoutSelected(searchUser);
-    setSearchedUsers(sWS);
+    setSearchedUsers(searchWithoutSelected(searchUser));
   };
 
   const searchWithoutSelected = (userList: User[]) => {
@@ -50,9 +53,10 @@ export const NewUserModal: React.FC<AddUserProp> = ({
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    const newUser = await api.addUserToConvo(params.conversationId, selectedUser[0].id);
-    console.log(newUser);
-
+    selectedUser.forEach(async user => {
+      await api.addUserToConvo(params.conversationId, user.id);
+    });
+    toggle?.toggleOpened();
   };
 
   const updateUsers = (u: User) => {
@@ -67,11 +71,23 @@ export const NewUserModal: React.FC<AddUserProp> = ({
     updateSelectedUser(newUsersList);
   };
 
+  const adjustUserListHeight = () => {
+    const selectedUsersHeight = selectedUsers.current!.getBoundingClientRect().height;
+    const userList = usersList.current;
+    const userListHeight = userList!.getBoundingClientRect().height;
+    const maxHeight = parseInt(getComputedStyle(userList).maxHeight.split('px')[0]);
+
+    if (selectedUsersHeight + userListHeight > maxHeight) {
+      const deltaHeight = selectedUsersHeight + userListHeight - maxHeight;
+      userList!.style.height = `${userListHeight - deltaHeight}px`;
+    }
+  };
+
   return <Modal
     title="Add new users:"
     toggle={toggle}
     className="new-user-modal">
-    <div className="users-to-add">
+    <div ref={selectedUsers} className="users-to-add">
       {selectedUser ? <ul>{selectedUser.map((u, key) =>
         <li key={key} onClick={() => { removeSelected(u); }}>
           {u.firstName} {u.lastName} <i className="fas fa-times"></i>

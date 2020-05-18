@@ -35,6 +35,11 @@ export const NewConvoModal: React.FC<AddConvoProp> = ({
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
+    console.log('submited');
+
+    // if (input.current?.value === '') {
+    //   return throw new Error('')
+    // }
     const newConvo = await createConversation(input.current?.value!);
     updateConvo(newConvo);
     toggle?.toggleOpened();
@@ -61,6 +66,7 @@ export const NewConvoModal: React.FC<AddConvoProp> = ({
           type="text"
           placeholder="Name your convo..."
           ref={input}
+          required
         />
         <div className="button-group">
           <button className="submit" type="submit" >Start</button>

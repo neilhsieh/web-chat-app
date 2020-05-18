@@ -2,7 +2,7 @@
 
 .conversation-page {
   display: grid;
-  grid-template-columns: [line1] 250px [middle] auto [last-line] ;
+  grid-template-columns: [line1] 275px [middle] auto [last-line] ;
   height: 100%;
 
   main.conversation {
@@ -39,14 +39,22 @@
       padding: 10px 20px; 
       overflow: scroll;
       li {
+        display: flex;
         padding: 3px 0;
         span {
           display: inline-block;
           border-radius: 25px;
-          background-color: $green;
+          background-color: $grey;
           padding: 13px;
           font-weight: 300;
         }
+      }
+      .my-message {
+        justify-content: flex-end;
+        span {
+          background-color: $green;
+        }
+
       }
     }
     .new-message {
