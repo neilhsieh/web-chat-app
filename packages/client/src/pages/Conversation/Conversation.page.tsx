@@ -13,6 +13,7 @@ import { AddUser } from '../../Component/AddUser/AddUser';
 import { joinRoom } from '../../lib/sockets';
 import { Messages } from '../../containers/messages.container';
 import { CurrentUser } from '../../containers/me.container';
+import { ConvoOptions } from '../../Component/ConvoOptions/ConvoOption';
 
 export const ConversationPage = () => {
   const params = useParams<Params>();
@@ -48,7 +49,11 @@ export const ConversationPage = () => {
       <header>{convo
         ? <h1>{convo.name} </h1>
         : <h1>Conversation page</h1>}
-        <AddUser />
+        <div className="convo-options">
+
+          < ConvoOptions />
+          <AddUser />
+        </div>
       </header>
       <ul className="messages">
 

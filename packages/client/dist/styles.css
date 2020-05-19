@@ -242,7 +242,7 @@ aside.conversations-container {
       .conversation-page main.conversation header button {
         background-color: transparent;
         color: #222;
-        font-size: 24px;
+        font-size: 20px;
         padding: 10px;
         border-radius: 10px;
         border: 1px solid #222;
@@ -252,6 +252,9 @@ aside.conversations-container {
           color: white;
           background-color: #222;
           border: 1px solid transparent; }
+      .conversation-page main.conversation header .convo-options {
+        display: flex;
+        position: relative; }
     .conversation-page main.conversation ul.messages {
       padding: 10px 20px;
       overflow: scroll; }
@@ -382,6 +385,43 @@ aside.conversations-container {
     .new-user-modal .button-group button:hover {
       opacity: 0.8;
       cursor: pointer; }
+
+.convo-opt {
+  margin-right: 10px; }
+  .convo-opt .convo-opt-dropdown {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    position: absolute;
+    top: 60px;
+    right: 50%;
+    background-color: transparent;
+    padding: 20px 10px;
+    box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    width: 175px; }
+    .convo-opt .convo-opt-dropdown.opened {
+      display: flex;
+      opacity: 1;
+      background-color: white; }
+    .convo-opt .convo-opt-dropdown ul {
+      width: 100%; }
+      .convo-opt .convo-opt-dropdown ul li {
+        font-size: 16px;
+        font-weight: 500;
+        color: #222;
+        margin-bottom: 5px;
+        border: 1px solid transparent; }
+        .convo-opt .convo-opt-dropdown ul li:last-child {
+          margin-bottom: 0; }
+        .convo-opt .convo-opt-dropdown ul li a {
+          display: block;
+          padding: 10px; }
+        .convo-opt .convo-opt-dropdown ul li:hover {
+          border-radius: 5px;
+          background-color: rgba(211, 211, 211, 0.1);
+          border: 1px solid rgba(211, 211, 211, 0.6);
+          cursor: pointer; }
 
 
 .auth-page {

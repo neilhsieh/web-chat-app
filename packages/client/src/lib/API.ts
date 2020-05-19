@@ -6,6 +6,17 @@ class API {
 
   prefix = 'http://localhost:9999';
 
+  deleteConvo = async (url: string) => {
+    const headers = {
+      authorization: `Bearer ${localStorage.getItem('token')}`
+    };
+
+    const res = await axios.delete(`${this.prefix}${url}`, {
+      headers
+    });
+    return res;
+  }
+
   createUser = async (
     firstName: string,
     lastName: string,
