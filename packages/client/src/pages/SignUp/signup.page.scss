@@ -32,6 +32,8 @@
       padding: 0 15px;
       border-radius: 20px;
       margin-left: 10px;
+      transition: all 0.2s ease-in-out;
+
       &.submit {
         border: none;
         background-color: $textGrey;
@@ -39,17 +41,22 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         font-weight: bold;
+        opacity: 0.8;
+        &:hover {
+          opacity: 1;
+          cursor: pointer;
+        }
       }
       &.close {
         border: none;
         background-color: $grey;
         color: $textGrey;
         text-transform: uppercase;
-      }
-      &:hover {
-        opacity: 0.8;
-        cursor: pointer;
+        &:hover {
+          opacity: 0.8;
+          cursor: pointer;
         }
+      }
     }
   }
 }

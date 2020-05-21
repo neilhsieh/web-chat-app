@@ -1,0 +1,56 @@
+@import '../../styles/variables.scss';
+
+#modal {
+  .modal.delete-convo-modal {
+    h2 {
+      line-height: 1.2;
+    }
+    .modal-popup {
+      min-height: 225px !important;
+      width: 400px;
+    }
+    .modal-content {
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 10px;
+    
+      button {
+        font-size: 14px;
+        line-height: 36px;
+        padding: 0 15px;
+        border-radius: 20px;
+        margin-left: 10px;
+        &.delete {
+          border: none;
+          background-color: rgba(220, 53, 69, 0.3);
+          color: $textGrey;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-weight: bold;
+          transition: all 0.2s ease-in-out;
+          &:hover {
+            background-color: #dc3545;
+            color: white;
+            cursor: pointer;
+          }
+        }
+        &.close-modal {
+          border: none;
+          background-color: $grey;
+          color: $textGrey;
+          text-transform: uppercase;
+          transition: all 0.2s ease-in-out;
+          &:hover {
+            opacity: 0.8;
+            cursor: pointer;
+          }
+        }
+      }
+    } 
+  }
+}

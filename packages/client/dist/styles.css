@@ -162,22 +162,27 @@ aside.conversations-container {
     line-height: 36px;
     padding: 0 15px;
     border-radius: 20px;
-    margin-left: 10px; }
+    margin-left: 10px;
+    transition: all 0.2s ease-in-out; }
     .new-convo-modal .modal-popup form .button-group button.submit {
       border: none;
       background-color: #222;
       color: white;
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-weight: bold; }
+      font-weight: bold;
+      opacity: 0.8; }
+      .new-convo-modal .modal-popup form .button-group button.submit:hover {
+        opacity: 1;
+        cursor: pointer; }
     .new-convo-modal .modal-popup form .button-group button.close-modal {
       border: none;
       background-color: rgba(211, 211, 211, 0.6);
       color: #222;
       text-transform: uppercase; }
-    .new-convo-modal .modal-popup form .button-group button:hover {
-      opacity: 0.8;
-      cursor: pointer; }
+      .new-convo-modal .modal-popup form .button-group button.close-modal:hover {
+        opacity: 0.8;
+        cursor: pointer; }
 
 #modal .modal {
   display: none;
@@ -369,22 +374,27 @@ aside.conversations-container {
     line-height: 36px;
     padding: 0 15px;
     border-radius: 20px;
-    margin-left: 10px; }
+    margin-left: 10px;
+    transition: all 0.2s ease-in-out; }
     .new-user-modal .button-group button.submit {
       border: none;
       background-color: #222;
       color: white;
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-weight: bold; }
+      font-weight: bold;
+      opacity: 0.8; }
+      .new-user-modal .button-group button.submit:hover {
+        opacity: 1;
+        cursor: pointer; }
     .new-user-modal .button-group button.close-modal {
       border: none;
       background-color: rgba(211, 211, 211, 0.6);
       color: #222;
       text-transform: uppercase; }
-    .new-user-modal .button-group button:hover {
-      opacity: 0.8;
-      cursor: pointer; }
+      .new-user-modal .button-group button.close-modal:hover {
+        opacity: 0.8;
+        cursor: pointer; }
 
 .convo-opt {
   margin-right: 10px; }
@@ -422,6 +432,49 @@ aside.conversations-container {
           background-color: rgba(211, 211, 211, 0.1);
           border: 1px solid rgba(211, 211, 211, 0.6);
           cursor: pointer; }
+
+#modal .modal.delete-convo-modal h2 {
+  line-height: 1.2; }
+
+#modal .modal.delete-convo-modal .modal-popup {
+  min-height: 225px !important;
+  width: 400px; }
+
+#modal .modal.delete-convo-modal .modal-content {
+  flex-direction: column;
+  justify-content: flex-end; }
+
+#modal .modal.delete-convo-modal .button-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px; }
+  #modal .modal.delete-convo-modal .button-group button {
+    font-size: 14px;
+    line-height: 36px;
+    padding: 0 15px;
+    border-radius: 20px;
+    margin-left: 10px; }
+    #modal .modal.delete-convo-modal .button-group button.delete {
+      border: none;
+      background-color: rgba(220, 53, 69, 0.3);
+      color: #222;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold;
+      transition: all 0.2s ease-in-out; }
+      #modal .modal.delete-convo-modal .button-group button.delete:hover {
+        background-color: #dc3545;
+        color: white;
+        cursor: pointer; }
+    #modal .modal.delete-convo-modal .button-group button.close-modal {
+      border: none;
+      background-color: rgba(211, 211, 211, 0.6);
+      color: #222;
+      text-transform: uppercase;
+      transition: all 0.2s ease-in-out; }
+      #modal .modal.delete-convo-modal .button-group button.close-modal:hover {
+        opacity: 0.8;
+        cursor: pointer; }
 
 
 .auth-page {
@@ -479,20 +532,25 @@ aside.conversations-container {
     line-height: 36px;
     padding: 0 15px;
     border-radius: 20px;
-    margin-left: 10px; }
+    margin-left: 10px;
+    transition: all 0.2s ease-in-out; }
     .sign-up-page .button-group button.submit {
       border: none;
       background-color: #222;
       color: white;
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-weight: bold; }
+      font-weight: bold;
+      opacity: 0.8; }
+      .sign-up-page .button-group button.submit:hover {
+        opacity: 1;
+        cursor: pointer; }
     .sign-up-page .button-group button.close {
       border: none;
       background-color: rgba(211, 211, 211, 0.6);
       color: #222;
       text-transform: uppercase; }
-    .sign-up-page .button-group button:hover {
-      opacity: 0.8;
-      cursor: pointer; }
+      .sign-up-page .button-group button.close:hover {
+        opacity: 0.8;
+        cursor: pointer; }
 

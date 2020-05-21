@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Route, Router, Switch, useParams } from 'react-router-dom';
+import { Route, Router, Switch, useParams, Redirect } from 'react-router-dom';
 
 import { HomePage } from '../pages/Home/Home.page';
 import { history } from './history';
@@ -15,7 +15,6 @@ export const AppRouter = () => {
   const [loading, setLoading] = useState(true);
   const { settingMe } = CurrentUser.useContainer();
 
-  // const convo = useRef();
   const loadMe = async () => {
     await api.me();
     settingMe();
