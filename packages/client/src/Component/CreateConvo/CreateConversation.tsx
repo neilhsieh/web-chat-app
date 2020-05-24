@@ -15,6 +15,8 @@ export const CreateConversation = () => {
   }, [opened]);
 
   const toggleOpened = () => {
+    console.log('toggle called');
+
     updateOpened(!opened);
   };
 

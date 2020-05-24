@@ -398,6 +398,16 @@ aside.conversations-container {
 
 .convo-opt {
   margin-right: 10px; }
+  .convo-opt button {
+    z-index: 5; }
+  .convo-opt .dropdown-outside-wrapper {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: transparent;
+    top: 0;
+    left: 0; }
   .convo-opt .convo-opt-dropdown {
     display: none;
     opacity: 0;
@@ -413,7 +423,11 @@ aside.conversations-container {
     .convo-opt .convo-opt-dropdown.opened {
       display: flex;
       opacity: 1;
-      background-color: white; }
+      background-color: white;
+      z-index: 5; }
+      .convo-opt .convo-opt-dropdown.opened + div {
+        display: block;
+        z-index: 4; }
     .convo-opt .convo-opt-dropdown ul {
       width: 100%; }
       .convo-opt .convo-opt-dropdown ul li {

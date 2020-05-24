@@ -2,6 +2,7 @@ import './convoOption.scss'
 
 import React, { useState, FormEvent, useRef, useEffect } from 'react';
 import { DeleteConvo } from '../../modals/DeleteConvo/DeleteConvo';
+import { hideOnClickOutside } from '../../lib/helperFunctions';
 
 export const ConvoOptions = () => {
 
@@ -9,6 +10,8 @@ export const ConvoOptions = () => {
   const [deleteToggle, setDeleteToggle] = useState<boolean>(false);
 
   const dropdown = useRef(null);
+  const backClickWrapper = useRef(null);
+
 
   useEffect(() => {
     openTransition();
@@ -36,15 +39,14 @@ export const ConvoOptions = () => {
     }
   };
 
-  const showDropdown = (e: FormEvent) => {
-    e.preventDefault();
+  const showDropdown = () => {
+    // e.preventDefault();
     setDropDownOpen(!dropDownOpen);
   };
 
   const showAllUsers = () => {
     console.log('show all users');
     setDropDownOpen(!dropDownOpen);
-
   };
 
   const deleteConvo = () => {
@@ -52,22 +54,31 @@ export const ConvoOptions = () => {
     setDropDownOpen(!dropDownOpen);
   };
 
-  return <div className="convo-opt">
-    <button className="convo-opt-btn" onClick={showDropdown}>
-      <i className="fas fa-ellipsis-h"></i>
-    </button>
-    <div ref={dropdown} className={`convo-opt-dropdown`}>
-      <ul>
-        <li>
-          <a onClick={showAllUsers}>Show All Users</a>
-        </li>
-        <li>
-          <a onClick={deleteConvo}>Delete Convo</a>
-        </li>
-      </ul>
-    </div>
-    <>
-      <DeleteConvo toggle={{ opened: deleteToggle, toggleOpened }} />
-    </>
-  </div >;
+  const closeOnClickOutside = () => {
+    const backgroundElement = backClickWrapper.current;
+    hideOnClickOutside(backgroundElement, showDropdown)
+  };
+
+  return <>
+    {dropDownOpen && closeOnClickOutside()}
+    <div className="convo-opt">
+      <button className="convo-opt-btn" onClick={showDropdown}>
+        <i className="fas fa-ellipsis-h"></i>
+      </button>
+      <div ref={dropdown} className={`convo-opt-dropdown`}>
+        <ul>
+          <li>
+            <a onClick={showAllUsers}>Show All Users</a>
+          </li>
+          <li>
+            <a onClick={deleteConvo}>Delete Convo</a>
+          </li>
+        </ul>
+      </div>
+      <div ref={backClickWrapper} className="dropdown-outside-wrapper"></div>
+      <>
+        <DeleteConvo toggle={{ opened: deleteToggle, toggleOpened }} />
+      </>
+    </div >
+  </>;
 };

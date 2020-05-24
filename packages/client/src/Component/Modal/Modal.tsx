@@ -3,6 +3,7 @@ import './modal.scss';
 import React, { FormEvent, Component } from 'react';
 import ReactDOM from 'react-dom';
 import { ToggleModalProp } from '../../lib/types';
+import { hideOnClickOutside } from '../../lib/helperFunctions';
 
 // These two containers are siblings in the DOM
 const modalRoot = document.getElementById('modal')!;
@@ -60,6 +61,11 @@ export class Modal extends Component<Props, State> {
     modalRoot.removeChild(this.el);
   }
 
+  clickEventListeners = () => {
+    const modalContainer = document.querySelector<HTMLElement>(`#modal .${this.props.className}`);
+    hideOnClickOutside(modalContainer, this.props.toggle.toggleOpened);
+
+  }
 
   modalTransition = () => {
     const modalContainer = document.querySelector<HTMLElement>(`#modal .${this.props.className}`);
@@ -79,22 +85,13 @@ export class Modal extends Component<Props, State> {
     }
   }
 
-
-  // closeModal = (e: FormEvent) => {
-  //   e.preventDefault();
-  //   this.props.toggle?.toggleOpened();
-  // }
-
   render() {
     return ReactDOM.createPortal(
-      // this.props.children,
       <>
+        {this.state.modalOpened && this.clickEventListeners()}
         <div className="modal-popup">
           <h2>{this.props.title}</h2>
           <div className="modal-content">{this.props.children}</div>
-          {/* <button className="close-modal" onClick={this.closeModal}
-          >Cancel</button> */}
-
         </div>
       </>,
       this.el

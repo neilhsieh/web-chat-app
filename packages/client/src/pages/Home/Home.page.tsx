@@ -2,7 +2,6 @@ import './home.page.scss';
 
 import React, { useEffect, useState } from 'react';
 import { ConversationList } from '../../Component/Sidebar/ConversationList';
-import { getMe } from '../../config';
 import { CurrentUser } from '../../containers/me.container';
 import { Redirect } from 'react-router';
 
