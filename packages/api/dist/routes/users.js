@@ -3,12 +3,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const User_1 = require("../models/User");
 const sequelize_1 = require("sequelize");
+const Conversation_1 = require("../models/Conversation");
 exports.usersRouter = express_1.Router();
 // CRUD of the User in REST API
 // Get list of users
 exports.usersRouter.get('/', async (_req, res) => {
     // Fetch ALL the users
     const users = await User_1.User.findAll();
+    // Send them in the pipe
+    res.json(users);
+});
+// Get list of all users IN a convo
+exports.usersRouter.get('/convoUsers/:convoId', async (req, res) => {
+    const { convoId } = req.params;
+    // Fetch ALL the users
+    const users = await User_1.User.findAll({
+        include: [{
+                model: Conversation_1.Conversation,
+                where: { id: convoId }
+            }]
+    });
     // Send them in the pipe
     res.json(users);
 });

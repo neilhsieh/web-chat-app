@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { User } from '../models/User';
 import bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
+import { Conversation } from '../models/Conversation';
 export const usersRouter = Router();
 
 // CRUD of the User in REST API
@@ -10,6 +11,20 @@ export const usersRouter = Router();
 usersRouter.get('/', async (_req, res) => {
   // Fetch ALL the users
   const users = await User.findAll();
+  // Send them in the pipe
+  res.json(users);
+});
+
+// Get list of all users IN a convo
+usersRouter.get('/convoUsers/:convoId', async (req, res) => {
+  const { convoId } = req.params;
+  // Fetch ALL the users
+  const users = await User.findAll({
+    include: [{
+      model: Conversation,
+      where: { id: convoId }
+    }]
+  });
   // Send them in the pipe
   res.json(users);
 });
