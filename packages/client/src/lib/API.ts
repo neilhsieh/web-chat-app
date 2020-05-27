@@ -6,6 +6,15 @@ class API {
 
   prefix = 'http://localhost:9999';
 
+  getUsersInConvo = async (convoId: string) => {
+    const headers = {
+      authorization: `Bearer ${localStorage.getItem('token')}`
+    };
+
+    const res = await axios.get(`${this.prefix}/users/convoUsers/${convoId}`, { headers });
+    return res.data;
+  }
+
   deleteConvo = async (convoId: string) => {
     const headers = {
       authorization: `Bearer ${localStorage.getItem('token')}`

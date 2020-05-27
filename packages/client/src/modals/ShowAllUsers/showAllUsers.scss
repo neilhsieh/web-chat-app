@@ -1,0 +1,58 @@
+@import "../../styles/variables.scss";
+
+#modal .show-all-user-convo-modal {
+  .modal-popup {
+    max-height: 80vh;
+  }
+  .modal-content {
+    flex-direction: column;
+    ul{
+      max-height: calc(80vh - 40px - 64px - 46px - 20px);
+      margin-bottom: 20px;
+      overflow-y: auto;
+      li {
+       padding: 5px 20px;
+       color: $textGrey;
+     }
+
+    }
+  }
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+
+    button {
+      font-size: 14px;
+      line-height: 36px;
+      padding: 0 15px;
+      border-radius: 20px;
+      margin-left: 10px;
+      transition: all 0.2s ease-in-out;
+
+      &.submit {
+        border: none;
+        background-color: $textGrey;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        opacity: 0.8;
+        &:hover {
+          opacity: 1;
+          cursor: pointer;
+        }
+      }
+      &.close-modal {
+        border: none;
+        background-color: $grey;
+        color: $textGrey;
+        text-transform: uppercase;
+        &:hover {
+          opacity: 0.8;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

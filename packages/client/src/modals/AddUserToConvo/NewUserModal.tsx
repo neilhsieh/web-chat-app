@@ -6,6 +6,7 @@ import { Modal } from '../../Component/Modal/Modal';
 import { ToggleModalProp, User } from '../../lib/types';
 import { api } from '../../lib/API';
 import { useParams } from 'react-router';
+import { Messages } from '../../containers/messages.container';
 
 interface AddUserProp {
   toggle: ToggleModalProp;
@@ -20,13 +21,15 @@ export const NewUserModal: React.FC<AddUserProp> = ({
   toggle,
 }) => {
 
+  const { createMessage } = Messages.useContainer();
+  const [newUserAdded, updateNewUserAdded] = useState<boolean>(false);
+
   const [searchedUsers, setSearchedUsers] = useState<User[]>([]);
   const [selectedUser, updateSelectedUser] = useState<User[]>([]);
 
   const usersList = useRef(null);
   const selectedUsers = useRef(null);
   const params = useParams<Params>();
-
 
   useEffect(() => {
     setSearchedUsers(searchWithoutSelected(searchedUsers));
@@ -57,6 +60,7 @@ export const NewUserModal: React.FC<AddUserProp> = ({
       await api.addUserToConvo(params.conversationId, user.id);
     });
     toggle?.toggleOpened();
+    updateNewUserAdded(true);
   };
 
   const updateUsers = (u: User) => {
@@ -83,30 +87,49 @@ export const NewUserModal: React.FC<AddUserProp> = ({
     }
   };
 
-  return <Modal
-    title="Add new users:"
-    toggle={toggle}
-    className="new-user-modal">
-    <div ref={selectedUsers} className="users-to-add">
-      {selectedUser ? <ul>{selectedUser.map((u, key) =>
-        <li key={key} onClick={() => { removeSelected(u); }}>
-          {u.firstName} {u.lastName} <i className="fas fa-times"></i>
-        </li>
-      )}</ul> :
-        null}
-    </div>
-    <form action="" onSubmit={submit}>
-      <input type="text" placeholder="Search names:" name="user search" id="" onChange={searchUser} />
-      <ul ref={usersList}>{searchedUsers.map((u, key) =>
-        <li key={key} onClick={() => { updateUsers(u) }}>
-          {u.firstName} {u.lastName} <i className="fas fa-plus"></i></li>
-      )}</ul>
-      <div className="button-group">
-        <button className="submit" type="submit" >Add User</button>
-        <button className="close-modal" type="button" onClick={
-          toggle?.toggleOpened
-        }>Cancel</button>
+  const newUserElement = () => {
+    let newUsersList = '';
+    selectedUser.forEach((user, i) => {
+      if (i === 0) {
+        newUsersList += `${user.firstName}`;
+      } else if (i === (selectedUser.length - 1)) {
+        newUsersList += ` and ${user.firstName}`;
+      } else {
+        newUsersList += `, ${user.firstName}`;
+      }
+    });
+    newUsersList += ` added to this conversation.`;
+    createMessage(params.conversationId, newUsersList);
+    updateNewUserAdded(false);
+  };
+
+  return <>
+    {newUserAdded && newUserElement()}
+    <Modal
+      title="Add new users:"
+      toggle={toggle}
+      className="new-user-modal">
+      <div ref={selectedUsers} className="users-to-add">
+        {selectedUser ? <ul>{selectedUser.map((u, key) =>
+          <li key={key} onClick={() => { removeSelected(u); }}>
+            {u.firstName} {u.lastName} <i className="fas fa-times"></i>
+          </li>
+        )}</ul> :
+          null}
       </div>
-    </form>
-  </Modal >
+      <form action="" onSubmit={submit}>
+        <input type="text" placeholder="Search names:" name="user search" id="" onChange={searchUser} />
+        <ul ref={usersList}>{searchedUsers.map((u, key) =>
+          <li key={key} onClick={() => { updateUsers(u) }}>
+            {u.firstName} {u.lastName} <i className="fas fa-plus"></i></li>
+        )}</ul>
+        <div className="button-group">
+          <button className="submit" type="submit" >Add User</button>
+          <button className="close-modal" type="button" onClick={
+            toggle?.toggleOpened
+          }>Cancel</button>
+        </div>
+      </form>
+    </Modal >
+  </>
 };

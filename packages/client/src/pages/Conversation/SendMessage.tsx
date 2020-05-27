@@ -12,14 +12,12 @@ export const SendMessage: React.FC<SendMessageProps> = ({
   conversationId,
   // onNewMessage
 }) => {
-  const { messages, createMessage } = Messages.useContainer();
+  const { createMessage } = Messages.useContainer();
 
   const input = useRef<HTMLInputElement>(null);
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log(conversationId, input.current?.value!);
-
     // const message = await api.createMessage(conversationId, input.current?.value!);
     // onNewMessage(message);
     createMessage(conversationId, input.current?.value!);

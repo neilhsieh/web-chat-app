@@ -42,6 +42,8 @@
     ul.messages {
       padding: 10px 20px; 
       overflow: scroll;
+      max-height: calc(100vh - 75px - 100px);
+
       li {
         display: flex;
         padding: 3px 0;

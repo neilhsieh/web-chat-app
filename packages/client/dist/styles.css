@@ -262,7 +262,8 @@ aside.conversations-container {
         position: relative; }
     .conversation-page main.conversation ul.messages {
       padding: 10px 20px;
-      overflow: scroll; }
+      overflow: scroll;
+      max-height: calc(100vh - 75px - 100px); }
       .conversation-page main.conversation ul.messages li {
         display: flex;
         padding: 3px 0; }
@@ -487,6 +488,50 @@ aside.conversations-container {
       text-transform: uppercase;
       transition: all 0.2s ease-in-out; }
       #modal .modal.delete-convo-modal .button-group button.close-modal:hover {
+        opacity: 0.8;
+        cursor: pointer; }
+
+#modal .show-all-user-convo-modal .modal-popup {
+  max-height: 80vh; }
+
+#modal .show-all-user-convo-modal .modal-content {
+  flex-direction: column; }
+  #modal .show-all-user-convo-modal .modal-content ul {
+    max-height: calc(80vh - 40px - 64px - 46px - 20px);
+    margin-bottom: 20px;
+    overflow-y: auto; }
+    #modal .show-all-user-convo-modal .modal-content ul li {
+      padding: 5px 20px;
+      color: #222; }
+
+#modal .show-all-user-convo-modal .button-group {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px; }
+  #modal .show-all-user-convo-modal .button-group button {
+    font-size: 14px;
+    line-height: 36px;
+    padding: 0 15px;
+    border-radius: 20px;
+    margin-left: 10px;
+    transition: all 0.2s ease-in-out; }
+    #modal .show-all-user-convo-modal .button-group button.submit {
+      border: none;
+      background-color: #222;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold;
+      opacity: 0.8; }
+      #modal .show-all-user-convo-modal .button-group button.submit:hover {
+        opacity: 1;
+        cursor: pointer; }
+    #modal .show-all-user-convo-modal .button-group button.close-modal {
+      border: none;
+      background-color: rgba(211, 211, 211, 0.6);
+      color: #222;
+      text-transform: uppercase; }
+      #modal .show-all-user-convo-modal .button-group button.close-modal:hover {
         opacity: 0.8;
         cursor: pointer; }
 

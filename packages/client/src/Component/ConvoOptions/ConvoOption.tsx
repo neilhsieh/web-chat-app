@@ -3,23 +3,33 @@ import './convoOption.scss'
 import React, { useState, FormEvent, useRef, useEffect } from 'react';
 import { DeleteConvo } from '../../modals/DeleteConvo/DeleteConvo';
 import { hideOnClickOutside } from '../../lib/helperFunctions';
+import { api } from '../../lib/API';
+import { useParams } from 'react-router';
+import { Params } from '../../lib/types';
+import { ShowAllUsers } from '../../modals/ShowAllUsers/ShowAllUsers';
 
 export const ConvoOptions = () => {
 
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
   const [deleteToggle, setDeleteToggle] = useState<boolean>(false);
+  const [showUsersToggle, setShowUsersToggle] = useState<boolean>(false);
 
   const dropdown = useRef(null);
   const backClickWrapper = useRef(null);
-
 
   useEffect(() => {
     openTransition();
   }, [dropDownOpen]);
 
-  const toggleOpened = () => {
+  const deleteToggleOpened = () => {
     setDeleteToggle(!deleteToggle);
   };
+
+  const showUsersTogleOpened = () => {
+    setShowUsersToggle(!showUsersToggle);
+  };
+
+
 
   const openTransition = () => {
     const dropdownContainer = dropdown!.current;
@@ -44,19 +54,19 @@ export const ConvoOptions = () => {
     setDropDownOpen(!dropDownOpen);
   };
 
-  const showAllUsers = () => {
-    console.log('show all users');
+  const showAllUsers = async () => {
+    showUsersTogleOpened();
     setDropDownOpen(!dropDownOpen);
   };
 
   const deleteConvo = () => {
-    toggleOpened();
+    deleteToggleOpened();
     setDropDownOpen(!dropDownOpen);
   };
 
   const closeOnClickOutside = () => {
     const backgroundElement = backClickWrapper.current;
-    hideOnClickOutside(backgroundElement, showDropdown)
+    hideOnClickOutside(backgroundElement, showDropdown);
   };
 
   return <>
@@ -77,7 +87,8 @@ export const ConvoOptions = () => {
       </div>
       <div ref={backClickWrapper} className="dropdown-outside-wrapper"></div>
       <>
-        <DeleteConvo toggle={{ opened: deleteToggle, toggleOpened }} />
+        <ShowAllUsers toggle={{ opened: showUsersToggle, toggleOpened: showUsersTogleOpened }} />
+        <DeleteConvo toggle={{ opened: deleteToggle, toggleOpened: deleteToggleOpened }} />
       </>
     </div >
   </>;
