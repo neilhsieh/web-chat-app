@@ -10,23 +10,33 @@ import { Conversations } from '../../containers/conversations.container';
 import { getMe } from '../../config';
 import { CurrentUser } from '../../containers/me.container';
 
-export const ConversationList = () => {
+interface MobileToggleProp {
+  mToggle: { mobileToggle: boolean, mobileToggleFunc: () => void } | null;
+}
+
+export const ConversationList: React.FC<MobileToggleProp> = ({ mToggle }) => {
 
   const { conversations, loadConversations } = Conversations.useContainer();
+  const [mobileToggle, setMobileToggle] = useState<boolean>();
+
   // const [me, setMe] = useState<string>();
   const { me } = CurrentUser.useContainer();
+
+  useEffect(() => {
+    mToggle && setMobileToggle(mToggle.mobileToggle);
+  }, [mToggle?.mobileToggle]);
+
   useEffect(() => {
     loadConversations();
-    gettingMe();
-
   }, []);
 
-  const gettingMe = async () => {
-    const me = await getMe();
-  };
-
-  return <aside className="conversations-container">
-    <h2><span>{me?.firstName ? `${me.firstName}'s Convos` : null} </span></h2>
+  return <aside className={`conversations-container ${mobileToggle && `slide-in`}`}>
+    <div className="sidebar-header">
+      <h2><span>{me?.firstName ? `${me.firstName}'s Convos` : null} </span></h2>
+      {mobileToggle &&
+        <button className="sidebar-close-btn" onClick={mToggle.mobileToggleFunc}><i className="fas fa-times"></i></button>
+      }
+    </div>
     <ul className="conversations">
       {conversations.map((convo, i) =>
         <li key={i} className={

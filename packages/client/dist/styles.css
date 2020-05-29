@@ -61,6 +61,22 @@ body {
     border-radius: 25px;
     border-width: 2px;
     border-style: solid; }
+  body button {
+    background-color: transparent;
+    color: #222;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #222;
+    transition: all 0.3s ease-in-out; }
+    body button:hover {
+      cursor: pointer;
+      color: white;
+      background-color: #222;
+      border: 1px solid transparent; }
+  @media only screen and (min-width: 769px) {
+    body button[class^="mobile-"] {
+      display: none; } }
 
 .home-page {
   display: grid;
@@ -77,36 +93,58 @@ body {
     padding: 0 20px; }
 
 aside.conversations-container {
-  grid-column: line1 /  middle;
-  width: 100%;
   display: grid;
+  grid-column: line1 /  middle;
   grid-template-rows: [first-line] 100px [middle] auto [third-line] 75px [last-line];
   height: 100%;
   max-height: 100vh;
-  padding: 0 10px; }
-  aside.conversations-container h2 {
-    grid-row: first-line / middle;
+  width: 0px;
+  overflow: hidden;
+  background-color: white; }
+  aside.conversations-container.slide-in {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 70vw;
+    padding: 0 10px; }
+  @media only screen and (min-width: 769px) {
+    aside.conversations-container {
+      padding: 0 10px;
+      width: 100%; } }
+  aside.conversations-container .sidebar-header {
     display: flex;
-    align-items: center;
-    font-size: 1.75rem;
-    color: #222;
-    padding: 20px 10px;
-    border-bottom: 1px solid rgba(211, 211, 211, 0.6); }
-    aside.conversations-container h2 span {
-      width: fit-content;
-      position: relative; }
-      aside.conversations-container h2 span:before {
-        content: '';
-        position: absolute;
-        z-index: -1;
-        bottom: -5px;
-        height: 15px;
-        width: 100%;
-        left: 0;
-        -webkit-transform: skew(-13deg);
-        -moz-transform: skew(-13deg);
-        -o-transform: skew(-13deg);
-        background-color: rgba(211, 211, 211, 0.6); }
+    justify-content: space-between;
+    align-items: center; }
+    aside.conversations-container .sidebar-header .sidebar-close-btn {
+      font-size: 1.5rem;
+      padding: 8px 13px;
+      height: fit-content; }
+      @media only screen and (min-width: 769px) {
+        aside.conversations-container .sidebar-header .sidebar-close-btn {
+          display: none; } }
+    aside.conversations-container .sidebar-header h2 {
+      grid-row: first-line / middle;
+      display: flex;
+      align-items: center;
+      font-size: 1.75rem;
+      color: #222;
+      padding: 20px 10px;
+      border-bottom: 1px solid rgba(211, 211, 211, 0.6); }
+      aside.conversations-container .sidebar-header h2 span {
+        width: fit-content;
+        position: relative; }
+        aside.conversations-container .sidebar-header h2 span:before {
+          content: '';
+          position: absolute;
+          z-index: -1;
+          bottom: -5px;
+          height: 15px;
+          width: 100%;
+          left: 0;
+          -webkit-transform: skew(-13deg);
+          -moz-transform: skew(-13deg);
+          -o-transform: skew(-13deg);
+          background-color: rgba(211, 211, 211, 0.6); }
   aside.conversations-container .conversations {
     margin-top: 20px;
     overflow-y: auto;
@@ -228,9 +266,12 @@ aside.conversations-container {
     opacity: 1; }
 
 .conversation-page {
+  height: 100%;
   display: grid;
-  grid-template-columns: [line1] 275px [middle] auto [last-line];
-  height: 100%; }
+  grid-template-columns: [line1] 0px [middle] auto [last-line]; }
+  @media only screen and (min-width: 769px) {
+    .conversation-page {
+      grid-template-columns: [line1] 275px [middle] auto [last-line]; } }
   .conversation-page main.conversation {
     grid-column: middle / last-line;
     display: grid;
@@ -239,24 +280,14 @@ aside.conversations-container {
       display: flex;
       align-items: center;
       padding: 5px 20px;
-      font-size: 2.5rem;
       font-weight: 700;
       color: #222;
       background-color: rgba(179, 234, 214, 0.35);
-      justify-content: space-between; }
-      .conversation-page main.conversation header button {
-        background-color: transparent;
-        color: #222;
-        font-size: 20px;
-        padding: 10px;
-        border-radius: 10px;
-        border: 1px solid #222;
-        transition: all 0.3s ease-in-out; }
-        .conversation-page main.conversation header button:hover {
-          cursor: pointer;
-          color: white;
-          background-color: #222;
-          border: 1px solid transparent; }
+      justify-content: space-between;
+      font-size: 1.5rem; }
+      @media only screen and (min-width: 769px) {
+        .conversation-page main.conversation header {
+          font-size: 2.5rem; } }
       .conversation-page main.conversation header .convo-options {
         display: flex;
         position: relative; }

@@ -12,10 +12,10 @@ import { CurrentUser } from '../containers/me.container';
 export const AppRouter = () => {
 
   const [loading, setLoading] = useState(true);
-  const { settingMe } = CurrentUser.useContainer();
+  const { me, settingMe } = CurrentUser.useContainer();
 
   const loadMe = async () => {
-    await api.me();
+    // await api.me();
     settingMe();
     setLoading(false);
   };

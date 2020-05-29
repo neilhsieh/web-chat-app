@@ -1,9 +1,14 @@
 @import '../../styles/variables.scss';
 
 .conversation-page {
-  display: grid;
-  grid-template-columns: [line1] 275px [middle] auto [last-line] ;
   height: 100%;
+  display: grid;
+  grid-template-columns: [line1] 0px [middle] auto [last-line] ;
+
+  @media only screen and (min-width: $bp-tablet-upper) {
+    grid-template-columns: [line1] 275px [middle] auto [last-line] ;
+  }
+  
 
   main.conversation {
     grid-column: middle / last-line;
@@ -13,27 +18,15 @@
       display: flex;
       align-items: center;
       padding: 5px 20px;
-      font-size: 2.5rem;
       font-weight: 700;
       color: $textGrey;
       background-color: $ltGreen;
       justify-content: space-between;
-
-      button {
-        background-color: transparent;
-        color: $textGrey;
-        font-size: 20px;
-        padding: 10px;
-        border-radius: 10px;
-        border: 1px solid $textGrey;
-        transition: all 0.3s ease-in-out;
-        &:hover {
-          cursor: pointer;
-          color: white;
-          background-color: $textGrey;
-          border: 1px solid transparent;
-        }
+      font-size: 1.5rem;
+      @media only screen and (min-width: $bp-tablet-upper) {
+        font-size: 2.5rem;
       }
+
       .convo-options {
         display: flex;
         position: relative;

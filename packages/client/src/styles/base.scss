@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
 @import './reset.scss';
-
+@import './variables.scss';
 * {
   box-sizing: border-box;
 }
@@ -22,5 +22,28 @@ body {
     border-width: 2px;
     border-style: solid;
   }
+
+  button {
+    background-color: transparent;
+    color: $textGrey;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid $textGrey;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      cursor: pointer;
+      color: white;
+      background-color: $textGrey;
+      border: 1px solid transparent;
+    }
+  }
+  
+  button[class^="mobile-"] {
+    @media only screen and (min-width: $bp-tablet-upper) {
+      display: none;
+    }
+  }
+  
 }
 

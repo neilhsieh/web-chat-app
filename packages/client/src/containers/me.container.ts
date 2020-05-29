@@ -1,6 +1,7 @@
 import { createContainer } from "unstated-next";
-import { useState } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { getMe } from "../config";
+import { api } from "../lib/API";
 
 interface Me {
   firstName: string;
@@ -10,17 +11,28 @@ interface Me {
 
 export const CurrentUser = createContainer(() => {
 
-  const [me, updateMe] = useState<Me>();
+  const [me, updateMe] = useState<Me | false>();
+
+  useEffect(() => {
+    settingMe();
+  }, []);
 
   const settingMe = async () => {
-    const me = await getMe();
-    const { firstName, id, lastName } = me;
+    // const me = await getMe();
+    try {
+      const me = await api.me();
 
-    updateMe({ firstName, id, lastName });
+      const { firstName, id, lastName } = me;
+
+      updateMe({ firstName, id, lastName });
+    } catch (e) {
+      updateMe(false);
+    }
+
   };
 
   return {
     me,
-    settingMe
+    settingMe,
   };
 });
