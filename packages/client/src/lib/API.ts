@@ -4,7 +4,7 @@ import { setMe, getMe } from '../config';
 
 class API {
 
-  prefix = 'http://localhost:9999';
+  prefix = '%%API_URL%%';
 
   getUsersInConvo = async (convoId: string) => {
     // const headers = {
