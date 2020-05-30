@@ -5,10 +5,7 @@ export const meRouter = Router();
 
 // Get ONE user
 meRouter.get('/', async (_req, res) => {
-  try {
-    const { id, firstName, lastName, email } = res.locals.user;
-    res.json({ id, firstName, lastName, email });
-  } catch (e) {
-    return false;
-  }
+  const { id, firstName, lastName, email } = res.locals.user;
+  res.json({ id, firstName, lastName, email });
+
 });
