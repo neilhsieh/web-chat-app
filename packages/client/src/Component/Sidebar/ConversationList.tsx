@@ -30,6 +30,11 @@ export const ConversationList: React.FC<MobileToggleProp> = ({ mToggle }) => {
     loadConversations();
   }, []);
 
+  const closeMobileSidebar = () => {
+    if (window.innerWidth > 769) return;
+    mToggle.mobileToggleFunc();
+  };
+
   return <aside className={`conversations-container ${mobileToggle && `slide-in`}`}>
     <div className="sidebar-header">
       <h2><span>{me?.firstName ? `${me.firstName}'s Convos` : null} </span></h2>
@@ -42,7 +47,7 @@ export const ConversationList: React.FC<MobileToggleProp> = ({ mToggle }) => {
         <li key={i} className={
           convo.id === window.location.href.split('/').pop() ? "selected" : ""
         }>
-          <Link to={`/convo/${convo.id}`}>
+          <Link onClick={closeMobileSidebar} to={`/convo/${convo.id}`}>
             {convo.name}
           </Link>
         </li>
