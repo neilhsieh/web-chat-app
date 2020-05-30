@@ -17,13 +17,13 @@ export class Message extends Model<Message> {
 
   @AllowNull(false)
   @ForeignKey(() => User)
-  @Column
+  @Column(DataType.UUID)
   userId: string;
 
   @BelongsTo(() => User)
   user: User;
 
   @ForeignKey(() => Conversation)
-  @Column
+  @Column(DataType.UUID)
   conversationId: string;
 }
