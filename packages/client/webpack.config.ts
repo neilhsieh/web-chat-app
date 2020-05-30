@@ -102,7 +102,7 @@ export default (_env: any, options: { mode: string }) => {
       new PluginReplace({
         values: {
           '%%API_URL%%': process.env.NODE_ENV === 'production'
-            ? 'https://chat-app-nh.herokuapp.com/'
+            ? 'https://chat-app-nh.herokuapp.com'
             : 'http://localhost:9999'
         }
       })

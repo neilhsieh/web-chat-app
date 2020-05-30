@@ -1,7 +1,7 @@
 import io, { } from 'socket.io-client';
 
 // export const adminSocket = io('%%API_URL%%', { forceNew: true });
-export const adminSocket = io('http://localhost:9999', { forceNew: true });
+export const adminSocket = io('%%API_URL%%', { forceNew: true });
 adminSocket.connect();
 
 // adminSocket.on('message', (m: any) => {
