@@ -30,7 +30,7 @@ __decorate([
 __decorate([
     sequelize_typescript_1.AllowNull(false),
     sequelize_typescript_1.ForeignKey(() => User_1.User),
-    sequelize_typescript_1.Column,
+    sequelize_typescript_1.Column(sequelize_typescript_1.DataType.UUID),
     __metadata("design:type", String)
 ], Message.prototype, "userId", void 0);
 __decorate([
@@ -39,7 +39,7 @@ __decorate([
 ], Message.prototype, "user", void 0);
 __decorate([
     sequelize_typescript_1.ForeignKey(() => Conversation_1.Conversation),
-    sequelize_typescript_1.Column,
+    sequelize_typescript_1.Column(sequelize_typescript_1.DataType.UUID),
     __metadata("design:type", String)
 ], Message.prototype, "conversationId", void 0);
 Message = __decorate([
