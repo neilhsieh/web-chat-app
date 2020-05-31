@@ -16,6 +16,8 @@ export const AppRouter = () => {
 
   const loadMe = async () => {
     // await api.me();
+    console.log('router setting me');
+
     settingMe();
     setLoading(false);
   };

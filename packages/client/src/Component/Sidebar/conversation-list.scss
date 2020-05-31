@@ -17,6 +17,10 @@ aside.conversations-container {
     top: 0;
     width: 70vw;
     padding: 0 10px;
+    @media only screen and (min-width: $bp-tablet-upper) {
+      position: relative;
+      width: 100%;
+    }
   }
 
   @media only screen and (min-width: $bp-tablet-upper) {

@@ -107,6 +107,10 @@ aside.conversations-container {
     top: 0;
     width: 70vw;
     padding: 0 10px; }
+    @media only screen and (min-width: 769px) {
+      aside.conversations-container.slide-in {
+        position: relative;
+        width: 100%; } }
   @media only screen and (min-width: 769px) {
     aside.conversations-container {
       padding: 0 10px;

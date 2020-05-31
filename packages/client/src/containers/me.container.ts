@@ -21,7 +21,6 @@ export const CurrentUser = createContainer(() => {
     // const me = await getMe();
     try {
       const me = await api.me();
-
       const { firstName, id, lastName } = me;
 
       updateMe({ firstName, id, lastName });

@@ -61,8 +61,9 @@ class API {
   }
 
   me = async () => {
-    const me = this.request('get', '/me');
-    setMe(me);
+    const me = await this.request('get', '/me');
+    // setMe(me);
+
     return me;
   }
 
@@ -113,6 +114,10 @@ class API {
     const headers = {
       authorization: `Bearer ${localStorage.getItem('token')}`
     };
+
+    if (!localStorage.getItem('token')) {
+      console.warn('WARNING: No header token set');
+    }
 
     try {
       let res: any;

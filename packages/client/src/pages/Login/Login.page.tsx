@@ -2,8 +2,9 @@ import './login.page.scss';
 import '../../styles/auth-pages.scss';
 import { api } from '../../lib/API';
 
-import React, { useRef, useState, FormEvent } from 'react';
+import React, { useRef, useState, FormEvent, useEffect } from 'react';
 import { Redirect } from 'react-router';
+import { CurrentUser } from '../../containers/me.container';
 
 
 export const LoginPage = () => {
@@ -12,27 +13,42 @@ export const LoginPage = () => {
   const password = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<boolean>();
   const [loggedIn, setLoggedIn] = useState<boolean>();
+  const { me, settingMe } = CurrentUser.useContainer();
+
+  useEffect(() => {
+    if (loggedIn) {
+      setMe();
+    }
+  }, [loggedIn]);
 
   const login = async (e: FormEvent) => {
     e.preventDefault();
-
     setError(false);
-
     const data = await api.login(email.current?.value!, password.current?.value!);
     if (!data) setError(true);
-    setLoggedIn(true);
     localStorage.setItem('token', data.token);
+
+    setLoggedIn(true);
+
   };
 
-  if (loggedIn) return <Redirect to="/" />;
+  const setMe = async () => {
+    await settingMe();
+  };
 
-  return <main className="login-page auth-page">
-    <form onSubmit={login}>
-      <h1>Login Page</h1>
-      {error && <span className="error-message">Invalid login credentials</span>}
-      <input ref={email} type="text" name="email" placeholder="Email" />
-      <input ref={password} type="text" name="password" placeholder="Password" />
-      <button type="submit">Login</button>
-    </form>
-  </main>
+  return <>
+    {loggedIn && me ? <Redirect to="/" />
+      :
+      <main className="login-page auth-page">
+        <form onSubmit={login}>
+          <h1>Login Page</h1>
+          {error && <span className="error-message">Invalid login credentials</span>}
+          <input ref={email} type="text" name="email" placeholder="Email" />
+          <input ref={password} type="password" name="password" placeholder="Password" />
+          <button type="submit">Login</button>
+        </form>
+      </main>
+    }
+
+  </>
 };

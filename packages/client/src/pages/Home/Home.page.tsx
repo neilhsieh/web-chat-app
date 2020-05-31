@@ -16,6 +16,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     checkUser();
+
   });
 
   const checkUser = () => {
@@ -33,6 +34,7 @@ export const HomePage = () => {
   };
 
   return <>
+
     {meSet
       ? <div className="home-page">
         <ConversationList mToggle={{ mobileToggle: true, mobileToggleFunc: toggleSidebar }} />
