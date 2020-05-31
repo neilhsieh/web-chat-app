@@ -45,7 +45,12 @@ export const LoginPage = () => {
           {error && <span className="error-message">Invalid login credentials</span>}
           <input ref={email} type="text" name="email" placeholder="Email" />
           <input ref={password} type="password" name="password" placeholder="Password" />
-          <button type="submit">Login</button>
+          <div className="button-group">
+            <button type="submit">Login</button>
+          </div>
+          <div className="redirect-signup">
+            <span><a href="/signup">Or cick me to sign up!</a></span>
+          </div>
         </form>
       </main>
     }

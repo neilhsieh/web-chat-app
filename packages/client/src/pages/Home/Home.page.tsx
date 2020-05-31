@@ -28,9 +28,9 @@ export const HomePage = () => {
   const loadingOrNot = () => {
     if (me === false) {
       return <Redirect to="/login" />;
-    } else {
-      return <div>Loading ...</div>
     }
+    return <div>Loading ...</div>
+
   };
 
   return <>

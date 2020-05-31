@@ -570,6 +570,18 @@ aside.conversations-container {
         opacity: 0.8;
         cursor: pointer; }
 
+.login-page .button-group {
+  display: flex;
+  justify-content: flex-end; }
+  .login-page .button-group button {
+    opacity: 0.8; }
+    .login-page .button-group button:hover {
+      opacity: 1; }
+
+.login-page .redirect-signup {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; }
 
 .auth-page {
   display: flex;
@@ -602,7 +614,7 @@ aside.conversations-container {
       color: white;
       text-transform: uppercase;
       border-radius: 30px;
-      padding: 5px 15px; }
+      padding: 0px 15px; }
       .auth-page form button:hover {
         cursor: pointer;
         opacity: 0.85; }
